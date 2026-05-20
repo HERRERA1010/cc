@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Campestre</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul: #1a2f4a;
+            --azul-claro: #2d4a6f;
+            --dorado: #b8943e;
+            --gris-texto: #555;
+            --gris-claro: #f5f6f8;
+            --gris-borde: #e4e7ec;
+            --verde: #2e8b57;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gris-texto);
+            line-height: 1.7;
+            background: #fff;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            color: var(--azul);
+        }
+
+        /* NAVBAR */
+        .navbar-main {
+            background: #fff;
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 16px 0;
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--azul);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .brand span { color: var(--dorado); }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--gris-texto) !important;
+            padding: 8px 16px !important;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--azul) !important;
+        }
+
+        .navbar-toggler { border: none; padding: 4px; }
+        .navbar-toggler:focus { box-shadow: none; }
+
+        /* PAGINAS */
+        .pagina { display: none; padding-top: 70px; }
+        .pagina.activa { display: block; }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-sombra {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(26,47,74,0.8), rgba(26,47,74,0.4));
+        }
+
+        .hero-texto { position: relative; color: #fff; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .hero-badge .punto {
+            width: 8px;
+            height: 8px;
+            background: var(--verde);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: clamp(36px, 5vw, 60px);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span { color: var(--dorado); }
+
+        .hero-sub {
+            font-size: 17px;
+            color: rgba(255,255,255,0.85);
+            max-width: 520px;
+            margin-bottom: 28px;
+        }
+
+        .hero-precio {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 28px;
+        }
+
+        .hero-precio small {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .btn-hero {
+            background: var(--dorado);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-hero:hover {
+            background: #a38232;
+            color: #fff;
+        }
+
+        .btn-hero-outline {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .btn-hero-outline:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border-color: rgba(255,255,255,0.7);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero-stats .valor {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .hero-stats .etiqueta {
+            font-size: 13px;
+            color: rgba(255,255,255,0.65);
+        }
+
+        /* SECCIONES */
+        .seccion { padding: 70px 0; }
+
+        .titulo-seccion {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .subtitulo-seccion {
+            font-size: 15px;
+            color: #888;
+            max-width: 500px;
+        }
+
+        /* TARJETAS */
+        .tarjeta {
+            background: #fff;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: box-shadow 0.3s;
+            height: 100%;
+        }
+
+        .tarjeta:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+        }
+
+        .tarjeta .icono {
+            font-size: 30px;
+            color: var(--azul-claro);
+            margin-bottom: 12px;
+        }
+
+        .tarjeta h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--azul);
+            margin-bottom: 8px;
+        }
+
+        .tarjeta p {
+            font-size: 13px;
+            margin: 0;
+            color: #777;
+        }
+
+        /* GALERIA */
+        .galeria-seccion { padding: 50px 0; }
+        .galeria-seccion:nth-child(even) { background: var(--gris-claro); }
+
+        .galeria-titulo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .carousel-item img {
+            height: 440px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            margin: 0 12px;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover { opacity: 1; }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(0.5);
+            width: 18px;
+            height: 18px;
+        }
+
+        .carousel-indicators button {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #aaa;
+            border: none;
+            opacity: 0.4;
+        }
+
+        .carousel-indicators .active {
+            background-color: var(--azul);
+            opacity: 1;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: var(--azul);
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+        }
+
+        .breadcrumb-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .breadcrumb-line a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* INFO */
+        .info-card {
+            background: #fff;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .info-sidebar {
+            background: #fff;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .info-list li:last-child { border: none; }
+
+        .info-list .lbl { color: #999; }
+        .info-list .val { font-weight: 600; color: var(--azul); }
+
+        .precio-box {
+            background: var(--azul);
+            color: #fff;
+            text-align: center;
+            border: none;
+        }
+
+        .precio-box .precio-label {
+            color: rgba(255,255,255,0.6);
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .precio-box .precio-valor {
+            font-size: 36px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin: 8px 0 4px;
+        }
+
+        .amenity {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--gris-claro);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .amenity .ok { color: var(--verde); }
+
+        .stat-mini {
+            background: #fff;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-mini .s-icono { font-size: 30px; margin-bottom: 8px; }
+        .stat-mini .s-valor {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: var(--azul);
+        }
+        .stat-mini .s-label {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* CONTACTO */
+        .contacto-card {
+            background: #fff;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 32px;
+        }
+
+        .form-ctrl {
+            border: 1px solid var(--gris-borde);
+            border-radius: 6px;
+            padding: 11px 14px;
+            font-size: 14px;
+            background: var(--gris-claro);
+        }
+
+        .form-ctrl:focus {
+            border-color: var(--azul-claro);
+            box-shadow: 0 0 0 3px rgba(45,74,111,0.08);
+            background: #fff;
+        }
+
+        .btn-enviar {
+            background: var(--azul);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-enviar:hover {
+            background: var(--azul-claro);
+            color: #fff;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .contacto-item:last-child { margin: 0; }
+
+        .contacto-icono {
+            width: 44px;
+            height: 44px;
+            background: var(--gris-claro);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--azul);
+        }
+
+        .mensaje-ok {
+            display: none;
+            background: rgba(46,139,87,0.08);
+            border: 1px solid var(--verde);
+            border-radius: 6px;
+            padding: 14px;
+            margin-top: 14px;
+            color: var(--verde);
+            font-weight: 500;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .mensaje-ok.show { display: block; }
+
+        /* FOOTER */
+        .footer {
+            background: var(--azul);
+            color: rgba(255,255,255,0.6);
+            padding: 40px 0 20px;
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 8px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .footer-links a:hover { color: var(--dorado); }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
+        }
+
+        @media (max-width: 991px) {
+            .hero h1 { font-size: 34px; }
+            .hero-precio { font-size: 30px; }
+            .hero-stats { gap: 24px; }
+            .carousel-item img { height: 300px; }
+        }
+
+        @media (max-width: 767px) {
+            .hero-stats { gap: 20px; flex-wrap: wrap; }
+            .carousel-item img { height: 220px; }
+            .carousel-control-prev,
+            .carousel-control-next { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-main">
+        <div class="container">
+            <a class="brand" onclick="mostrarPagina('inicio')">Casa<span>Campestre</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" id="nav-inicio" onclick="mostrarPagina('inicio')">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" id="nav-fotos" onclick="mostrarPagina('fotos')">Fotos</a></li>
+                    <li class="nav-item"><a class="nav-link" id="nav-informacion" onclick="mostrarPagina('informacion')">Información</a></li>
+                    <li class="nav-item"><a class="nav-link" id="nav-contacto" onclick="mostrarPagina('contacto')">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= INICIO ================= -->
+    <div class="pagina activa" id="pagina-inicio">
+        <div class="hero">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Casa Campestre">
+            <div class="hero-sombra"></div>
+            <div class="container">
+                <div class="hero-texto">
+                    <div class="hero-badge"><span class="punto"></span> Disponible para venta</div>
+                    <h1>Encuentra tu hogar<br>en la <span>naturaleza</span></h1>
+                    <p class="hero-sub">Residencia campestre con diseño moderno, amplios espacios y rodeada de un entorno natural incomparable.</p>
+                    <div class="hero-precio">$18,000,000 <small>MXN</small></div>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <button class="btn-hero" onclick="mostrarPagina('fotos')">Ver Fotos</button>
+                        <button class="btn-hero-outline" onclick="mostrarPagina('contacto')">Contactar</button>
+                    </div>
+                    <div class="hero-stats">
+                        <div><div class="valor">420 m²</div><div class="etiqueta">Construcción</div></div>
+                        <div><div class="valor">2,000 m²</div><div class="etiqueta">Terreno</div></div>
+                        <div><div class="valor">5</div><div class="etiqueta">Habitaciones</div></div>
+                        <div><div class="valor">4</div><div class="etiqueta">Baños</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="titulo-seccion">Características Principales</h2>
+                    <p class="subtitulo-seccion mx-auto">Una residencia pensada para quienes buscan tranquilidad, confort y conexión con la naturaleza.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F3E0;</div><h3>Arquitectura Moderna</h3><p>Diseño contemporáneo con materiales naturales y amplios ventanales.</p></div></div>
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F333;</div><h3>Entorno Campestre</h3><p>Ubicada en zona rural con vistas panorámicas y privacidad total.</p></div></div>
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F30A;</div><h3>Alberca Privada</h3><p>Alberca climatizada con terraza y área de descanso exterior.</p></div></div>
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F697;</div><h3>Garage Triple</h3><p>Garage techado para 3 vehículos con cuarto de herramientas.</p></div></div>
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F373;</div><h3>Cocina Gourmet</h3><p>Cocina integral con isla, electrodomésticos premium y despensa.</p></div></div>
+                    <div class="col-md-4"><div class="tarjeta"><div class="icono">&#x1F512;</div><h3>Seguridad Privada</h3><p>Circuito cerrado, acceso controlado y vigilancia las 24 horas.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" style="background: var(--gris-claro);">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="titulo-seccion">Espacios de la Propiedad</h2>
+                    <p class="subtitulo-seccion mx-auto">Cada rincón ha sido diseñado pensando en tu comodidad.</p>
+                </div>
+                <div class="row g-3 justify-content-center">
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x1F3DB;</div><h3>Fachada</h3></div></div>
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x1F697;</div><h3>Garage</h3></div></div>
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x1F6CB;</div><h3>Sala</h3></div></div>
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x1F37D;</div><h3>Cocina</h3></div></div>
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x2615;</div><h3>Comedor</h3></div></div>
+                    <div class="col-6 col-md-3 col-lg-2"><div class="tarjeta" onclick="mostrarPagina('fotos')" style="cursor:pointer;"><div style="font-size:28px; margin-bottom:8px;">&#x1F6CF;</div><h3>Habitaciones</h3></div></div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn-hero" onclick="mostrarPagina('fotos')">Ver Galería Completa</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4"><h5 class="mb-3" style="font-family:'Playfair Display',serif; font-size:20px;">Casa<span style="color:var(--dorado);">Campestre</span></h5><p style="font-size:13px;">Residencia premium en entorno campestre con todas las comodidades y acabados de primera calidad.</p></div>
+                    <div class="col-6 col-lg-2"><h5>Navegación</h5><ul class="footer-links"><li><a onclick="mostrarPagina('inicio')">Inicio</a></li><li><a onclick="mostrarPagina('fotos')">Fotos</a></li><li><a onclick="mostrarPagina('informacion')">Información</a></li><li><a onclick="mostrarPagina('contacto')">Contacto</a></li></ul></div>
+                    <div class="col-6 col-lg-3"><h5>Espacios</h5><ul class="footer-links"><li><a onclick="mostrarPagina('fotos')">Fachada</a></li><li><a onclick="mostrarPagina('fotos')">Garage</a></li><li><a onclick="mostrarPagina('fotos')">Sala y Cocina</a></li><li><a onclick="mostrarPagina('fotos')">Habitaciones</a></li><li><a onclick="mostrarPagina('fotos')">Patio</a></li></ul></div>
+                    <div class="col-lg-3"><h5>Contacto</h5><ul class="footer-links"><li><a onclick="mostrarPagina('contacto')">+52 55 1234 5678</a></li><li><a onclick="mostrarPagina('contacto')">ventas@casacampestre.mx</a></li><li><a onclick="mostrarPagina('contacto')">Valle de Bravo, Estado de México</a></li></ul></div>
+                </div>
+                <div class="footer-bottom">© 2026 Casa Campestre. Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ================= FOTOS ================= -->
+    <div class="pagina" id="pagina-fotos">
+        <div class="page-header">
+            <div class="container">
+                <div class="breadcrumb-line"><a onclick="mostrarPagina('inicio')">Inicio</a><span>/</span><span>Fotos</span></div>
+                <h1>Galería de Fotos</h1>
+                <p>Explora cada espacio de esta hermosa propiedad</p>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Fachada</h2>
+                <div id="c-fachada" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-fachada" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-fachada" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-fachada" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-fachada" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80" class="d-block w-100" alt="Fachada"><div class="carousel-caption"><h6>Fachada principal al atardecer</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" class="d-block w-100" alt="Fachada"><div class="carousel-caption"><h6>Vista lateral y jardín</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" class="d-block w-100" alt="Fachada"><div class="carousel-caption"><h6>Acceso principal</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80" class="d-block w-100" alt="Fachada"><div class="carousel-caption"><h6>Vista completa de la residencia</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-fachada" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-fachada" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Garage</h2>
+                <div id="c-garage" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-garage" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-garage" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-garage" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-garage" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80" class="d-block w-100" alt="Garage"><div class="carousel-caption"><h6>Interior del garage triple</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=80" class="d-block w-100" alt="Garage"><div class="carousel-caption"><h6>Área de almacenamiento</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=80" class="d-block w-100" alt="Garage"><div class="carousel-caption"><h6>Acabados premium</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&q=80" class="d-block w-100" alt="Garage"><div class="carousel-caption"><h6>Puerta automática</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-garage" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-garage" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Sala</h2>
+                <div id="c-sala" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-sala" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-sala" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-sala" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-sala" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80" class="d-block w-100" alt="Sala"><div class="carousel-caption"><h6>Sala principal con vista al jardín</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=1200&q=80" class="d-block w-100" alt="Sala"><div class="carousel-caption"><h6>Sala con chimenea</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=1200&q=80" class="d-block w-100" alt="Sala"><div class="carousel-caption"><h6>Área de estar</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&q=80" class="d-block w-100" alt="Sala"><div class="carousel-caption"><h6>Sala familiar</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-sala" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-sala" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Cocina</h2>
+                <div id="c-cocina" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-cocina" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-cocina" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-cocina" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-cocina" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80" class="d-block w-100" alt="Cocina"><div class="carousel-caption"><h6>Cocina con isla central</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80" class="d-block w-100" alt="Cocina"><div class="carousel-caption"><h6>Electrodomésticos premium</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=80" class="d-block w-100" alt="Cocina"><div class="carousel-caption"><h6>Diseño luminoso</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1556909114-45e794269987?w=1200&q=80" class="d-block w-100" alt="Cocina"><div class="carousel-caption"><h6>Barra de desayuno</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-cocina" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-cocina" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Comedor</h2>
+                <div id="c-comedor" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-comedor" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-comedor" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-comedor" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-comedor" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1200&q=80" class="d-block w-100" alt="Comedor"><div class="carousel-caption"><h6>Comedor formal</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1617098900591-3f90928e8c54?w=1200&q=80" class="d-block w-100" alt="Comedor"><div class="carousel-caption"><h6>Mesa para 10 personas</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" class="d-block w-100" alt="Comedor"><div class="carousel-caption"><h6>Iluminación ambiental</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80" class="d-block w-100" alt="Comedor"><div class="carousel-caption"><h6>Diseño elegante</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-comedor" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-comedor" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Habitaciones</h2>
+                <div id="c-hab" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-hab" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-hab" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-hab" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-hab" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80" class="d-block w-100" alt="Habitación"><div class="carousel-caption"><h6>Suite principal</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=1200&q=80" class="d-block w-100" alt="Habitación"><div class="carousel-caption"><h6>Vestidor principal</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80" class="d-block w-100" alt="Habitación"><div class="carousel-caption"><h6>Habitación secundaria</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" class="d-block w-100" alt="Habitación"><div class="carousel-caption"><h6>Iluminación natural</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-hab" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-hab" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="galeria-seccion">
+            <div class="container">
+                <h2 class="galeria-titulo">Patio</h2>
+                <div id="c-patio" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#c-patio" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#c-patio" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#c-patio" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#c-patio" data-bs-slide-to="3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80" class="d-block w-100" alt="Patio"><div class="carousel-caption"><h6>Patio trasero con alberca</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" class="d-block w-100" alt="Patio"><div class="carousel-caption"><h6>Pérgola exterior</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" class="d-block w-100" alt="Patio"><div class="carousel-caption"><h6>Área de asador</h6></div></div>
+                        <div class="carousel-item"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80" class="d-block w-100" alt="Patio"><div class="carousel-caption"><h6>Terraza panorámica</h6></div></div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#c-patio" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#c-patio" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4"><h5 class="mb-3" style="font-family:'Playfair Display',serif; font-size:20px;">Casa<span style="color:var(--dorado);">Campestre</span></h5><p style="font-size:13px;">Residencia premium en entorno campestre con todas las comodidades.</p></div>
+                    <div class="col-6 col-lg-2"><h5>Navegación</h5><ul class="footer-links"><li><a onclick="mostrarPagina('inicio')">Inicio</a></li><li><a onclick="mostrarPagina('fotos')">Fotos</a></li><li><a onclick="mostrarPagina('informacion')">Información</a></li><li><a onclick="mostrarPagina('contacto')">Contacto</a></li></ul></div>
+                    <div class="col-6 col-lg-3"><h5>Espacios</h5><ul class="footer-links"><li><a href="#c-fachada">Fachada</a></li><li><a href="#c-garage">Garage</a></li><li><a href="#c-sala">Sala</a></li><li><a href="#c-cocina">Cocina</a></li><li><a href="#c-comedor">Comedor</a></li><li><a href="#c-hab">Habitaciones</a></li><li><a href="#c-patio">Patio</a></li></ul></div>
+                    <div class="col-lg-3"><h5>Contacto</h5><ul class="footer-links"><li><a onclick="mostrarPagina('contacto')">+52 55 1234 5678</a></li><li><a onclick="mostrarPagina('contacto')">ventas@casacampestre.mx</a></li></ul></div>
+                </div>
+                <div class="footer-bottom">© 2026 Casa Campestre. Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ================= INFORMACION ================= -->
+    <div class="pagina" id="pagina-informacion">
+        <div class="page-header">
+            <div class="container">
+                <div class="breadcrumb-line"><a onclick="mostrarPagina('inicio')">Inicio</a><span>/</span><span>Información</span></div>
+                <h1>Información de la Propiedad</h1>
+                <p>Detalles completos de Casa Campestre</p>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="info-card">
+                            <h2 style="font-size:26px; margin-bottom:16px;">Descripción</h2>
+                            <p style="line-height:1.9; margin-bottom:16px;">Residencia campestre de <strong>420 m²</strong> sobre un terreno de <strong>2,000 m²</strong>, ubicada en una de las zonas más exclusivas de Valle de Bravo. Rodeada de naturaleza con vistas panorámicas a la montaña y total privacidad.</p>
+                            <p style="line-height:1.9; margin-bottom:16px;">La planta baja cuenta con sala de doble altura, comedor formal, cocina gourmet con isla de mármol, cuarto de TV, medio baño de visitas y acceso directo al garage triple.</p>
+                            <p style="line-height:1.9;">En la planta alta se encuentran las 5 habitaciones, incluyendo la suite principal con vestidor, baño con tina y terraza privada. Las habitaciones secundarias comparten baños completos.</p>
+
+                            <h3 style="font-family:'Inter',sans-serif; font-size:17px; font-weight:600; margin:28px 0 20px;">Dimensiones</h3>
+                            <div class="row g-3">
+                                <div class="col-6 col-md-3"><div class="stat-mini"><div class="s-icono">&#x1F4CF;</div><div class="s-valor">420 m²</div><div class="s-label">Construcción</div></div></div>
+                                <div class="col-6 col-md-3"><div class="stat-mini"><div class="s-icono">&#x1F3D7;</div><div class="s-valor">2,000 m²</div><div class="s-label">Terreno</div></div></div>
+                                <div class="col-6 col-md-3"><div class="stat-mini"><div class="s-icono">&#x1F6CF;</div><div class="s-valor">5</div><div class="s-label">Habitaciones</div></div></div>
+                                <div class="col-6 col-md-3"><div class="stat-mini"><div class="s-icono">&#x1F6BF;</div><div class="s-valor">4</div><div class="s-label">Baños</div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="info-sidebar precio-box">
+                            <div class="precio-label">Precio de Venta</div>
+                            <div class="precio-valor">$18,000,000</div>
+                            <p class="mb-3" style="font-size:12px; opacity:0.6;">MXN · Negociable</p>
+                            <button class="btn-hero w-100" onclick="mostrarPagina('contacto')">Contactar</button>
+                        </div>
+                        <div class="info-sidebar">
+                            <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid #f0f0f0;">Detalles</h4>
+                            <ul class="info-list">
+                                <li><span class="lbl">Tipo</span><span class="val">Casa campestre</span></li>
+                                <li><span class="lbl">Niveles</span><span class="val">2 plantas</span></li>
+                                <li><span class="lbl">Antigüedad</span><span class="val">2 años</span></li>
+                                <li><span class="lbl">Estado</span><span class="val">Excelente</span></li>
+                                <li><span class="lbl">Estacionamiento</span><span class="val">3 autos</span></li>
+                                <li><span class="lbl">Pisos</span><span class="val">Mármol y parqué</span></li>
+                                <li><span class="lbl">Ventanas</span><span class="val">Doble cristal</span></li>
+                            </ul>
+                        </div>
+                        <div class="info-sidebar">
+                            <h4 style="font-family:'Inter',sans-serif; font-size:15px; font-weight:600; margin-bottom:14px;">Amenidades</h4>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="amenity"><span class="ok">✓</span>Alberca</span>
+                                <span class="amenity"><span class="ok">✓</span>Jardín</span>
+                                <span class="amenity"><span class="ok">✓</span>Asador</span>
+                                <span class="amenity"><span class="ok">✓</span>Seguridad 24h</span>
+                                <span class="amenity"><span class="ok">✓</span>Vestidor</span>
+                                <span class="amenity"><span class="ok">✓</span>Cocina gourmet</span>
+                                <span class="amenity"><span class="ok">✓</span>Garage triple</span>
+                                <span class="amenity"><span class="ok">✓</span>Terraza</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4"><h5 class="mb-3" style="font-family:'Playfair Display',serif; font-size:20px;">Casa<span style="color:var(--dorado);">Campestre</span></h5><p style="font-size:13px;">Residencia premium en entorno campestre con todas las comodidades.</p></div>
+                    <div class="col-6 col-lg-2"><h5>Navegación</h5><ul class="footer-links"><li><a onclick="mostrarPagina('inicio')">Inicio</a></li><li><a onclick="mostrarPagina('fotos')">Fotos</a></li><li><a onclick="mostrarPagina('informacion')">Información</a></li><li><a onclick="mostrarPagina('contacto')">Contacto</a></li></ul></div>
+                    <div class="col-6 col-lg-3"><h5>Espacios</h5><ul class="footer-links"><li><a onclick="mostrarPagina('fotos')">Fachada</a></li><li><a onclick="mostrarPagina('fotos')">Garage</a></li><li><a onclick="mostrarPagina('fotos')">Sala y Cocina</a></li><li><a onclick="mostrarPagina('fotos')">Habitaciones</a></li><li><a onclick="mostrarPagina('fotos')">Patio</a></li></ul></div>
+                    <div class="col-lg-3"><h5>Contacto</h5><ul class="footer-links"><li><a onclick="mostrarPagina('contacto')">+52 55 1234 5678</a></li><li><a onclick="mostrarPagina('contacto')">ventas@casacampestre.mx</a></li></ul></div>
+                </div>
+                <div class="footer-bottom">© 2026 Casa Campestre. Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ================= CONTACTO ================= -->
+    <div class="pagina" id="pagina-contacto">
+        <div class="page-header">
+            <div class="container">
+                <div class="breadcrumb-line"><a onclick="mostrarPagina('inicio')">Inicio</a><span>/</span><span>Contacto</span></div>
+                <h1>Contáctanos</h1>
+                <p>Estamos aquí para ayudarte</p>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="contacto-card">
+                            <h2 style="font-size:24px; margin-bottom:6px;">Envíanos un mensaje</h2>
+                            <p style="font-size:14px; color:#999; margin-bottom:24px;">Completa el formulario y te responderemos pronto.</p>
+                            <form id="formContacto" onsubmit="enviarFormulario(event)">
+                                <div class="row g-3">
+                                    <div class="col-md-6"><label class="form-label" style="font-size:14px; font-weight:500;">Nombre *</label><input type="text" class="form-control form-ctrl" required></div>
+                                    <div class="col-md-6"><label class="form-label" style="font-size:14px; font-weight:500;">Teléfono *</label><input type="tel" class="form-control form-ctrl" required></div>
+                                </div>
+                                <div class="mt-3"><label class="form-label" style="font-size:14px; font-weight:500;">Correo electrónico *</label><input type="email" class="form-control form-ctrl" required></div>
+                                <div class="mt-3"><label class="form-label" style="font-size:14px; font-weight:500;">¿Qué te interesa?</label>
+                                    <select class="form-select form-ctrl">
+                                        <option selected disabled>Seleccionar</option>
+                                        <option>Agendar visita</option>
+                                        <option>Recorrido virtual</option>
+                                        <option>Financiamiento</option>
+                                        <option>Negociación</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div class="mt-3"><label class="form-label" style="font-size:14px; font-weight:500;">Mensaje</label><textarea class="form-control form-ctrl" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea></div>
+                                <button type="submit" class="btn-enviar mt-3">Enviar Mensaje</button>
+                                <div class="mensaje-ok" id="msgOk">Mensaje enviado correctamente. Te contactaremos pronto.</div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="info-sidebar">
+                            <h4 style="font-family:'Inter',sans-serif; font-size:16px; font-weight:600; margin-bottom:18px;">Información de Contacto</h4>
+                            <div class="contacto-item">
+                                <div class="contacto-icono">&#x1F4DE;</div>
+                                <div><strong style="font-size:13px; display:block; margin-bottom:2px;">Teléfono</strong><span style="font-size:14px;">+52 55 1234 5678</span></div>
+                            </div>
+                            <div class="contacto-item">
+                                <div class="contacto-icono">&#x1F4F1;</div>
+                                <div><strong style="font-size:13px; display:block; margin-bottom:2px;">WhatsApp</strong><span style="font-size:14px;">+52 55 9876 5432</span></div>
+                            </div>
+                            <div class="contacto-item">
+                                <div class="contacto-icono">&#x2709;</div>
+                                <div><strong style="font-size:13px; display:block; margin-bottom:2px;">Correo</strong><span style="font-size:14px;">ventas@casacampestre.mx</span></div>
+                            </div>
+                            <div class="contacto-item">
+                                <div class="contacto-icono">&#x1F4CD;</div>
+                                <div><strong style="font-size:13px; display:block; margin-bottom:2px;">Dirección</strong><span style="font-size:14px;">Valle de Bravo, Estado de México</span></div>
+                            </div>
+                        </div>
+                        <div class="info-sidebar">
+                            <h4 style="font-family:'Inter',sans-serif; font-size:16px; font-weight:600; margin-bottom:14px;">Horario</h4>
+                            <ul class="info-list">
+                                <li><span class="lbl">Lunes a Viernes</span><span class="val">9:00 – 19:00</span></li>
+                                <li><span class="lbl">Sábado</span><span class="val">10:00 – 15:00</span></li>
+                                <li><span class="lbl">Domingo</span><span class="val">Con cita previa</span></li>
+                            </ul>
+                        </div>
+                        <div class="info-sidebar text-center" style="background:var(--gris-claro); border:2px dashed var(--gris-borde); height:160px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px;">
+                            <span style="font-size:28px;">&#x1F5FA;</span>
+                            <span style="font-size:13px; color:#888;">Mapa de ubicación<br><small>Valle de Bravo, Estado de México</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4"><h5 class="mb-3" style="font-family:'Playfair Display',serif; font-size:20px;">Casa<span style="color:var(--dorado);">Campestre</span></h5><p style="font-size:13px;">Residencia premium en entorno campestre con todas las comodidades.</p></div>
+                    <div class="col-6 col-lg-2"><h5>Navegación</h5><ul class="footer-links"><li><a onclick="mostrarPagina('inicio')">Inicio</a></li><li><a onclick="mostrarPagina('fotos')">Fotos</a></li><li><a onclick="mostrarPagina('informacion')">Información</a></li><li><a onclick="mostrarPagina('contacto')">Contacto</a></li></ul></div>
+                    <div class="col-6 col-lg-3"><h5>Espacios</h5><ul class="footer-links"><li><a onclick="mostrarPagina('fotos')">Fachada</a></li><li><a onclick="mostrarPagina('fotos')">Garage</a></li><li><a onclick="mostrarPagina('fotos')">Sala y Cocina</a></li><li><a onclick="mostrarPagina('fotos')">Habitaciones</a></li><li><a onclick="mostrarPagina('fotos')">Patio</a></li></ul></div>
+                    <div class="col-lg-3"><h5>Contacto</h5><ul class="footer-links"><li><a>+52 55 1234 5678</a></li><li><a>ventas@casacampestre.mx</a></li></ul></div>
+                </div>
+                <div class="footer-bottom">© 2026 Casa Campestre. Todos los derechos reservados.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function mostrarPagina(pagina) {
+            document.querySelectorAll('.pagina').forEach(function(el) { el.classList.remove('activa'); });
+            document.querySelectorAll('.nav-link').forEach(function(el) { el.classList.remove('active'); });
+
+            document.getElementById('pagina-' + pagina).classList.add('activa');
+            var link = document.getElementById('nav-' + pagina);
+            if (link) link.classList.add('active');
+
+            var menu = document.getElementById('menuNav');
+            if (menu.classList.contains('show')) {
+                var bsCollapse = bootstrap.Collapse.getInstance(menu);
+                if (bsCollapse) bsCollapse.hide();
+            }
+
+            window.scrollTo({ top: 0 });
+        }
+
+        function enviarFormulario(e) {
+            e.preventDefault();
+            var msg = document.getElementById('msgOk');
+            msg.classList.add('show');
+            e.target.reset();
+            setTimeout(function() { msg.classList.remove('show'); }, 4000);
+        }
+    </script>
+</body>
+</html>
+
