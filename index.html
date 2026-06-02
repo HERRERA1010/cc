@@ -3,75 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa en Venta — Mérida, Yucatán</title>
+    <title>Campestre — Mérida, Yucatán</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --azul: #1a2f4a;
-            --azul-claro: #2d4a6f;
-            --dorado: #b8943e;
-            --gris-texto: #555;
-        }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-        body { font-family: "Inter", sans-serif; color: var(--gris-texto); line-height: 1.7; }
-        h1, h2, h3, h4, h5 { font-family: "Playfair Display", serif; color: var(--azul); }
-
-        .navbar-main { background: #fff; border-bottom: 1px solid #dee2e6; }
-        .brand { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 600; color: var(--azul); text-decoration: none; }
-        
-        .lang-btn { border: 1px solid #dee2e6; background: #fff; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; color: var(--gris-texto); cursor: pointer; font-family: "Inter", sans-serif; }
-        .lang-btn.active { background: var(--azul); color: #fff; border-color: var(--azul); }
-        
-        .nav-link-custom { font-weight: 500; font-size: 14px; color: var(--gris-texto) !important; }
-        .nav-link-custom:hover { color: var(--azul) !important; }
-
-        .hero { position: relative; min-height: 85vh; display: flex; align-items: center; background: linear-gradient(135deg, var(--azul), var(--azul-claro)); overflow: hidden; }
-        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; }
-        .hero-texto { position: relative; color: #fff; z-index: 2; }
-        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.2); padding: 6px 16px; border-radius: 30px; font-size: 13px; color: #fff; margin-bottom: 20px; }
-        .hero-badge .punto { width: 8px; height: 8px; background: var(--dorado); border-radius: 50%; }
-        .hero-titulo { color: #fff; font-size: clamp(32px, 5vw, 56px); line-height: 1.15; margin-bottom: 16px; }
-        .hero-titulo span { color: var(--dorado); }
-        .hero-sub { font-size: 17px; color: rgba(255,255,255,0.85); max-width: 520px; margin-bottom: 28px; }
-        .hero-precio { font-family: "Playfair Display", serif; font-size: 40px; font-weight: 700; color: #fff; }
-        .hero-precio small { font-size: 16px; font-weight: 400; opacity: 0.7; }
-
-        .pro-card { background: #fff; border: 1px solid #dee2e6; border-radius: 8px; padding: 28px 24px; height: 100%; transition: box-shadow 0.3s; }
-        .pro-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.07); }
-        .pro-icono { width: 48px; height: 48px; color: var(--azul-claro); margin-bottom: 16px; }
-        .pro-card h3 { font-family: "Inter", sans-serif; font-size: 16px; font-weight: 600; color: var(--azul); margin-bottom: 8px; }
-        .pro-card p { font-size: 14px; color: #777; margin: 0; }
-
-        .galeria-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
-        .galeria-img:hover { transform: scale(1.02); }
-        .carousel-item img { height: 450px; object-fit: cover; border-radius: 8px; }
-        .carousel-control-prev, .carousel-control-next { width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; top: 50%; transform: translateY(-50%); opacity: 0.8; }
-        .carousel-control-prev:hover, .carousel-control-next:hover { opacity: 1; }
-        .carousel-control-prev-icon, .carousel-control-next-icon { filter: invert(0.5); width: 18px; height: 18px; }
-        .carousel-indicators [data-bs-target] { width: 8px; height: 8px; border-radius: 50%; background: #aaa; border: none; opacity: 0.4; }
-        .carousel-indicators .active { background: var(--azul); opacity: 1; width: 24px; border-radius: 4px; }
-
-        .contacto-icono { width: 44px; height: 44px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--azul); }
-        .contacto-etiqueta { font-size: 13px; font-weight: 600; display: block; color: var(--azul); margin-bottom: 4px; }
-        .contacto-dato { font-size: 14px; }
-
-        .footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 30px 0 16px; }
-
-        @media (max-width: 767px) {
-            .hero { min-height: 60vh; }
-            .hero-titulo { font-size: 28px; }
-            .hero-precio { font-size: 28px; }
-            .carousel-item img { height: 250px; }
-            .galeria-img { height: 180px; }
-        }
-    </style>
+   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-main">
         <div class="container">
-            <a class="brand" href="#inicio">Casa Mérida</a>
+            <a class="brand" href="#inicio">Casa Campestre</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -90,7 +31,7 @@
     </nav>
 
     <section id="inicio" class="hero">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80" alt="Casa">
+        <img class="hero-bg" src="assets/img/fachada/fachada2.png" alt="Casa">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -98,7 +39,7 @@
                         <div class="hero-badge"><span class="punto"></span> <span data-i18n="badge">Disponible</span></div>
                         <h1 class="hero-titulo"><span data-i18n="hero_1">Tu nuevo hogar en</span><br><span data-i18n="hero_2"><span>Mérida, Yucatán</span></span></h1>
                         <p class="hero-sub" data-i18n="hero_sub">Casa con acabados de primera en una de las colonias más antiguas, céntricas y tranquilas de Mérida.</p>
-                        <div class="hero-precio">$3,500,000 <small>MXN</small></div>
+                        <div class="hero-precio">$18,000,000 <small>MXN</small></div>
                     </div>
                 </div>
             </div>
@@ -114,8 +55,8 @@
             <div class="row g-4">
                 <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h3 data-i18n="v1_titulo">Zona Residencial Premium</h3><p data-i18n="v1_desc">Colonia tranquila, segura y con amplio sentido de comunidad.</p></div></div>
                 <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h4"/><path d="M7 12h10"/></svg><h3 data-i18n="v2_titulo">Plazas Comerciales</h3><p data-i18n="v2_desc">Cerca de Galerías Mérida, La Isla y diversas plazas.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H6"/><path d="M22 12v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2"/><path d="M4 12v-8a2 2 0 0 1 2-2h4l2 3h10"/></svg><h3 data-i18n="v3_titulo">Hospitales y Clínicas</h3><p data-i18n="v3_desc">A minutos de Star Médica y Christus Muguerza.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 10h5"/><path d="M7 16l4-4 4 4"/></svg><h3 data-i18n="v4_titulo">Cines y Entretenimiento</h3><p data-i18n="v4_desc">Cinépolis y Cinemark a pocos minutos.</p></div></div>
+                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H6"/><path d="M22 12v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2"/><path d="M4 12v-8a2 2 0 0 1 2-2h4l2 3h10"/></svg><h3 data-i18n="v3_titulo">Hospitales y Clínicas</h3><p data-i18n="v3_desc">A minutos de Star Médica.</p></div></div>
+                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 10h5"/><path d="M7 16l4-4 4 4"/></svg><h3 data-i18n="v4_titulo">Cines y Entretenimiento</h3><p data-i18n="v4_desc">Cinépolis y Cinemex a pocos minutos.</p></div></div>
                 <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><h3 data-i18n="v5_titulo">Servicios Completos</h3><p data-i18n="v5_desc">Supermercados, escuelas, bancos y farmacias cerca.</p></div></div>
                 <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3 data-i18n="v6_titulo">Inversión Segura</h3><p data-i18n="v6_desc">Mérida tiene la mayor plusvalía en México.</p></div></div>
             </div>
@@ -125,16 +66,16 @@
     <section class="py-5 bg-light">
         <div class="container">
             <div class="row align-items-center g-4">
-                <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" class="img-fluid rounded" alt="Colonia"></div>
+                <div class="col-lg-6"><img src="assets/img/fachada/fachada1.png" class="img-fluid rounded" alt="Colonia"></div>
                 <div class="col-lg-6">
                     <h2 class="mb-3" data-i18n="colonia_titulo">Colonia Histórica y Céntrica</h2>
                     <p class="text-muted" data-i18n="colonia_p1">Una de las colonias con más historia y tradición de Mérida. Barrio tranquilo, seguro y lleno de encanto.</p>
                     <p class="text-muted mb-4" data-i18n="colonia_p2">A minutos del Centro Histórico, Paseo de Montejo y los mejores restaurantes.</p>
                     <div class="row g-3">
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="colonia_c1">Centro Histórico</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="colonia_c2">Paseo de Montejo</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">15 min</h5><small class="text-muted" data-i18n="colonia_c3">Plazas</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">20 min</h5><small class="text-muted" data-i18n="colonia_c4">Aeropuerto</small></div></div>
+                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="colonia_c1">Centro Histórico</small></div></div>
+                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">2 min</h5><small class="text-muted" data-i18n="colonia_c2">Paseo de Montejo</small></div></div>
+                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="colonia_c3">Plazas</small></div></div>
+                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">25 min</h5><small class="text-muted" data-i18n="colonia_c4">Aeropuerto</small></div></div>
                     </div>
                 </div>
             </div>
@@ -148,8 +89,8 @@
                 <p class="text-muted" data-i18n="galeria_sub">Conoce cada rincón de la propiedad</p>
             </div>
             <div class="row g-3 mb-4">
-                <div class="col-6 col-md-3"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" class="galeria-img" alt="1"></div>
-                <div class="col-6 col-md-3"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" class="galeria-img" alt="2"></div>
+                <div class="col-6 col-md-3"><img src="assets/img/sala y recibidor/salaprincioal.png" class="galeria-img" alt="1"></div>
+                <div class="col-6 col-md-3"><img src="assets/img/comedor principal/comedorPrincipal1.png" class="galeria-img" alt="2"></div>
                 <div class="col-6 col-md-3"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" class="galeria-img" alt="3"></div>
                 <div class="col-6 col-md-3"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" class="galeria-img" alt="4"></div>
             </div>
@@ -184,10 +125,10 @@
                 <div class="col-md-6"><div class="pro-card h-100"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><h3 data-i18n="ubi_conexion_titulo">Excelente Conectividad</h3><p data-i18n="ubi_conexion_desc">Fácil acceso a las principales avenidas. 20 min del aeropuerto.</p></div></div>
             </div>
             <div class="row g-3">
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="ubi_c1">Centro Histórico</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="ubi_c2">Paseo de Montejo</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="ubi_c3">Plazas</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">20 min</h5><small class="text-muted" data-i18n="ubi_c4">Aeropuerto</small></div></div>
+                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="ubi_c1">Centro Histórico</small></div></div>
+                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">2 min</h5><small class="text-muted" data-i18n="ubi_c2">Paseo de Montejo</small></div></div>
+                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="ubi_c3">Plazas</small></div></div>
+                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">25 min</h5><small class="text-muted" data-i18n="ubi_c4">Aeropuerto</small></div></div>
             </div>
         </div>
     </section>
@@ -234,7 +175,7 @@
                 v1_titulo: "Zona Residencial Premium", v1_desc: "Colonia tranquila, segura y con amplio sentido de comunidad.",
                 v2_titulo: "Plazas Comerciales", v2_desc: "Cerca de Galerías Mérida, La Isla y diversas plazas.",
                 v3_titulo: "Hospitales y Clínicas", v3_desc: "A minutos de Star Médica y Christus Muguerza.",
-                v4_titulo: "Cines y Entretenimiento", v4_desc: "Cinépolis y Cinemark a pocos minutos.",
+                v4_titulo: "Cines y Entretenimiento", v4_desc: "Cinépolis y Cinemex a pocos minutos.",
                 v5_titulo: "Servicios Completos", v5_desc: "Supermercados, escuelas, bancos y farmacias cerca.",
                 v6_titulo: "Inversión Segura", v6_desc: "Mérida tiene la mayor plusvalía en México.",
                 colonia_titulo: "Colonia Histórica y Céntrica",

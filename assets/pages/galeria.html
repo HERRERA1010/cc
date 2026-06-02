@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Fotos — Casa Mérida</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul: #1a2f4a;
+            --azul-claro: #2d4a6f;
+            --dorado: #b8943e;
+            --gris-texto: #555;
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { font-family: "Inter", sans-serif; color: var(--gris-texto); line-height: 1.7; }
+        h1, h2, h3, h4, h5 { font-family: "Playfair Display", serif; color: var(--azul); }
+
+        .navbar-main { background: #fff; border-bottom: 1px solid #dee2e6; }
+        .brand { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 600; color: var(--azul); text-decoration: none; }
+        
+        .lang-btn { border: 1px solid #dee2e6; background: #fff; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; color: var(--gris-texto); cursor: pointer; font-family: "Inter", sans-serif; }
+        .lang-btn.active { background: var(--azul); color: #fff; border-color: var(--azul); }
+        
+        .nav-link-custom { font-weight: 500; font-size: 14px; color: var(--gris-texto) !important; }
+        .nav-link-custom:hover { color: var(--azul) !important; }
+        .nav-link-custom.active { color: var(--azul) !important; font-weight: 600; }
+
+        .section-title { font-size: 28px; margin-bottom: 8px; }
+        .section-desc { font-size: 14px; color: #999; margin-bottom: 24px; font-style: italic; }
+
+        .foto-card { border-radius: 8px; overflow: hidden; transition: transform 0.3s; cursor: pointer; }
+        .foto-card:hover { transform: translateY(-4px); }
+        .foto-card img { width: 100%; height: 280px; object-fit: cover; display: block; }
+        .foto-card .card-footer-custom { padding: 10px 14px; background: #f8f9fa; font-size: 13px; color: var(--azul); font-weight: 500; }
+
+        /* LIGHTBOX */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .lightbox-overlay.show { display: flex; opacity: 1; }
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        .footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 30px 0 16px; }
+
+        @media (max-width: 767px) {
+            .foto-card img { height: 200px; }
+            .section-title { font-size: 22px; }
+            .lightbox-nav { width: 36px; height: 36px; font-size: 16px; }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-main">
+        <div class="container">
+            <a class="brand" href="index.html">Casa Mérida</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html#galeria">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html#ubicacion">Ubicación</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html#contacto">Contacto</a></li>
+                </ul>
+                <div class="d-flex gap-2 mt-2 mt-lg-0 justify-content-center">
+                    <button class="lang-btn active" id="btn-es" onclick="cambiarIdioma('es')">ES</button>
+                    <button class="lang-btn" id="btn-en" onclick="cambiarIdioma('en')">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="py-5" style="background:var(--azul); padding-top:140px; padding-bottom:70px;">
+        <div class="container text-center">
+            <h1 class="mb-3" style="color:#fff; font-size:clamp(28px,5vw,42px);" data-i18n="page_title">Galería de Fotos</h1>
+            <p style="color:rgba(255,255,255,0.7);" data-i18n="page_sub">Conoce cada espacio de esta hermosa propiedad</p>
+        </div>
+    </section>
+
+    <!-- FACHADA -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_fachada">Fachada</h2>
+            <p class="section-desc" data-i18n="sec_fachada_desc">Vista exterior de la propiedad</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80" alt="Fachada 1" data-caption="Fachada principal">
+                        <div class="card-footer-custom">Fachada principal</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80" alt="Fachada 2" data-caption="Vista lateral">
+                        <div class="card-footer-custom">Vista lateral</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="Fachada 3" data-caption="Acceso principal">
+                        <div class="card-footer-custom">Acceso principal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUARTO PRINCIPAL -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_cuarto1">Cuarto Principal</h2>
+            <p class="section-desc" data-i18n="sec_cuarto1_desc">Suite principal con baño y vestidor</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80" alt="Cuarto principal 1" data-caption="Vista general">
+                        <div class="card-footer-custom">Vista general</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1617325247661-675ab4b64ae2?w=1200&q=80" alt="Cuarto principal 2" data-caption="Vestidor">
+                        <div class="card-footer-custom">Vestidor</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80" alt="Cuarto principal 3" data-caption="Detalle iluminación">
+                        <div class="card-footer-custom">Detalle iluminación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUARTO 2 -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_cuarto2">Cuarto 2</h2>
+            <p class="section-desc" data-i18n="sec_cuarto2_desc">Habitación secundaria con ventilación natural</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" alt="Cuarto 2 - 1" data-caption="Vista general">
+                        <div class="card-footer-custom">Vista general</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80" alt="Cuarto 2 - 2" data-caption="Ventanal">
+                        <div class="card-footer-custom">Ventanal</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1200&q=80" alt="Cuarto 2 - 3" data-caption="Closet">
+                        <div class="card-footer-custom">Closet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUARTO 3 -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_cuarto3">Cuarto 3</h2>
+            <p class="section-desc" data-i18n="sec_cuarto3_desc">Habitación versátil, ideal para oficina o huéspedes</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=1200&q=80" alt="Cuarto 3 - 1" data-caption="Vista general">
+                        <div class="card-footer-custom">Vista general</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=1200&q=80" alt="Cuarto 3 - 2" data-caption="Espacio amplio">
+                        <div class="card-footer-custom">Espacio amplio</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1617098900591-3f90928e8c54?w=1200&q=80" alt="Cuarto 3 - 3" data-caption="Detalles">
+                        <div class="card-footer-custom">Detalles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PISCINA -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_piscina">Piscina</h2>
+            <p class="section-desc" data-i18n="sec_piscina_desc">Área de piscina con terraza y zona de descanso</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1572331165267-854da2b021b1?w=1200&q=80" alt="Piscina 1" data-caption="Vista general">
+                        <div class="card-footer-custom">Vista general</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1519974719765-e6559eac2575?w=1200&q=80" alt="Piscina 2" data-caption="Terraza">
+                        <div class="card-footer-custom">Terraza</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1562844450-4807932dc677?w=1200&q=80" alt="Piscina 3" data-caption="Área de descanso">
+                        <div class="card-footer-custom">Área de descanso</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BODEGA -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_bodega">Bodega</h2>
+            <p class="section-desc" data-i18n="sec_bodega_desc">Espacio de almacenamiento y utilidad</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1200&q=80" alt="Bodega 1" data-caption="Interior">
+                        <div class="card-footer-custom">Interior</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=80" alt="Bodega 2" data-caption="Estanterías">
+                        <div class="card-footer-custom">Estanterías</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&q=80" alt="Bodega 3" data-caption="Acceso">
+                        <div class="card-footer-custom">Acceso</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COCINA -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_cocina">Cocina</h2>
+            <p class="section-desc" data-i18n="sec_cocina_desc">Cocina equipada con acabados de primera</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80" alt="Cocina 1" data-caption="Isla central">
+                        <div class="card-footer-custom">Isla central</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80" alt="Cocina 2" data-caption="Electrodomésticos">
+                        <div class="card-footer-custom">Electrodomésticos</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=80" alt="Cocina 3" data-caption="Área de preparación">
+                        <div class="card-footer-custom">Área de preparación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMEDOR -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_comedor">Comedor</h2>
+            <p class="section-desc" data-i18n="sec_comedor_desc">Amplio comedor con iluminación natural</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?w=1200&q=80" alt="Comedor 1" data-caption="Mesa principal">
+                        <div class="card-footer-custom">Mesa principal</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80" alt="Comedor 2" data-caption="Iluminación">
+                        <div class="card-footer-custom">Iluminación</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80" alt="Comedor 3" data-caption="Vista panorámica">
+                        <div class="card-footer-custom">Vista panorámica</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTUDIO -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-i18n="sec_estudio">Estudio</h2>
+            <p class="section-desc" data-i18n="sec_estudio_desc">Espacio ideal para trabajo remoto o lectura</p>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" alt="Estudio 1" data-caption="Escritorio">
+                        <div class="card-footer-custom">Escritorio</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80" alt="Estudio 2" data-caption="Estantería">
+                        <div class="card-footer-custom">Estantería</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="foto-card border" onclick="openLightbox(0, this)">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80" alt="Estudio 3" data-caption="Vista general">
+                        <div class="card-footer-custom">Vista general</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1, event)">❮</button>
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1, event)">❯</button>
+        <img id="lightbox-img" src="" alt="Imagen ampliada">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <h5 style="font-family:'Playfair Display',serif; font-size:20px; color:#fff; margin-bottom:10px;">Casa <span style="color:var(--dorado)">Mérida</span></h5>
+            <p class="mb-3" style="font-size:13px;" data-i18n="footer_desc">Casa en venta en una de las colonias más antiguas y tranquilas de Mérida.</p>
+            <div style="padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); font-size:12px; color:rgba(255,255,255,0.35);" data-i18n="footer_copy">© 2026 Casa Mérida. Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var traducciones = {
+            es: {
+                page_title: "Galería de Fotos",
+                page_sub: "Conoce cada espacio de esta hermosa propiedad",
+                sec_fachada: "Fachada", sec_fachada_desc: "Vista exterior de la propiedad",
+                sec_cuarto1: "Cuarto Principal", sec_cuarto1_desc: "Suite principal con baño y vestidor",
+                sec_cuarto2: "Cuarto 2", sec_cuarto2_desc: "Habitación secundaria con ventilación natural",
+                sec_cuarto3: "Cuarto 3", sec_cuarto3_desc: "Habitación versátil, ideal para oficina o huéspedes",
+                sec_piscina: "Piscina", sec_piscina_desc: "Área de piscina con terraza y zona de descanso",
+                sec_bodega: "Bodega", sec_bodega_desc: "Espacio de almacenamiento y utilidad",
+                sec_cocina: "Cocina", sec_cocina_desc: "Cocina equipada con acabados de primera",
+                sec_comedor: "Comedor", sec_comedor_desc: "Amplio comedor con iluminación natural",
+                sec_estudio: "Estudio", sec_estudio_desc: "Espacio ideal para trabajo remoto o lectura",
+                footer_desc: "Casa en venta en una de las colonias más antiguas y tranquilas de Mérida.",
+                footer_copy: "© 2026 Casa Mérida. Todos los derechos reservados."
+            },
+            en: {
+                page_title: "Photo Gallery",
+                page_sub: "Explore every space of this beautiful property",
+                sec_fachada: "Facade", sec_fachada_desc: "Exterior view of the property",
+                sec_cuarto1: "Master Bedroom", sec_cuarto1_desc: "Master suite with bath and walk-in closet",
+                sec_cuarto2: "Bedroom 2", sec_cuarto2_desc: "Secondary room with natural ventilation",
+                sec_cuarto3: "Bedroom 3", sec_cuarto3_desc: "Versatile room, ideal for office or guests",
+                sec_piscina: "Pool", sec_piscina_desc: "Pool area with terrace and lounge zone",
+                sec_bodega: "Storage", sec_bodega_desc: "Storage and utility space",
+                sec_cocina: "Kitchen", sec_cocina_desc: "Equipped kitchen with premium finishes",
+                sec_comedor: "Dining Room", sec_comedor_desc: "Spacious dining room with natural lighting",
+                sec_estudio: "Study", sec_estudio_desc: "Ideal space for remote work or reading",
+                footer_desc: "House for sale in one of Mérida's oldest and quietest neighborhoods.",
+                footer_copy: "© 2026 Casa Mérida. All rights reserved."
+            }
+        };
+
+        function cambiarIdioma(idioma) {
+            document.getElementById('btn-es').classList.toggle('active', idioma === 'es');
+            document.getElementById('btn-en').classList.toggle('active', idioma === 'en');
+            document.documentElement.lang = idioma;
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var k = el.getAttribute('data-i18n');
+                if (traducciones[idioma][k]) el.innerHTML = traducciones[idioma][k];
+            });
+            document.title = idioma === 'en' ? 'Photo Gallery — Casa Mérida' : 'Galería de Fotos — Casa Mérida';
+        }
+
+        // LIGHTBOX
+        var allImages = [];
+        var currentIndex = 0;
+
+        // Collect all images on page load
+        function collectImages() {
+            allImages = [];
+            document.querySelectorAll('.foto-card img').forEach(function(img) {
+                allImages.push({
+                    src: img.src,
+                    alt: img.alt,
+                    caption: img.getAttribute('data-caption') || img.alt
+                });
+            });
+        }
+
+        function openLightbox(index, el) {
+            collectImages();
+            // Find the clicked image's index in allImages
+            var clickedSrc = el.querySelector('img').src;
+            currentIndex = 0;
+            for (var i = 0; i < allImages.length; i++) {
+                if (allImages[i].src === clickedSrc) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+            showLightboxImage();
+            document.getElementById('lightbox').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showLightboxImage() {
+            var img = document.getElementById('lightbox-img');
+            img.src = allImages[currentIndex].src;
+            img.alt = allImages[currentIndex].alt;
+            document.getElementById('lightbox-caption').textContent = allImages[currentIndex].caption;
+        }
+
+        function navigateLightbox(direction, e) {
+            e.stopPropagation();
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = allImages.length - 1;
+            if (currentIndex >= allImages.length) currentIndex = 0;
+            showLightboxImage();
+        }
+
+        function closeLightbox(e) {
+            if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            var lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('show')) return;
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+            if (e.key === 'ArrowLeft') navigateLightbox(-1, e);
+            if (e.key === 'ArrowRight') navigateLightbox(1, e);
+        });
+    </script>
+</body>
+</html>
+
