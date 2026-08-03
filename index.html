@@ -1,821 +1,755 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-<meta name="theme-color" content="#1e3a5f" />
-<title>MeridaCampestre | Tu Nueva Casa en Mérida, Yucatán</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/300.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/400.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/500.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.0/300.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.0/400.css" />
-<style>
-  :root {
-    --blue-deep: #1e3a5f;
-    --blue-main: #2c5282;
-    --blue-soft: #4a6fa5;
-    --blue-light: #e8f0f7;
-    --blue-pale: #f4f8fc;
-    --gold: #8b6f3d;
-    --gold-dark: #6b5428;
-    --gold-light: #a88a55;
-    --white: #ffffff;
-    --text-dark: #1a2332;
-    --text-soft: #4a5568;
-  }
-  * { -webkit-tap-highlight-color: transparent; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { 
-    font-family: 'Outfit', sans-serif; 
-    font-weight: 300; 
-    background-color: var(--white); 
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
-  .font-display { font-family: 'Cormorant Garamond', serif; font-weight: 300; }
-  .font-body { font-family: 'Outfit', sans-serif; font-weight: 300; }
-  
-  .hero-bg {
-    background-image: linear-gradient(180deg, rgba(30,58,95,0.25) 0%, rgba(30,58,95,0.78) 100%), url('https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/15c27468d-0cbf-4468-b409-e8ff5867f57d.png');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-  }
-  
-  .text-blue-deep { color: var(--blue-deep) !important; }
-  .text-gold { color: var(--gold) !important; }
-  .bg-blue-deep { background-color: var(--blue-deep) !important; }
-  .bg-blue-main { background-color: var(--blue-main) !important; }
-  .bg-blue-pale { background-color: var(--blue-pale) !important; }
-  .bg-gold { background-color: var(--gold) !important; }
-  .border-gold { border-color: var(--gold) !important; }
-  .border-blue-light { border-color: var(--blue-light) !important; }
-  
-  .btn-primary-custom {
-    background-color: var(--blue-deep);
-    color: var(--white);
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    min-height: 44px;
-  }
-  .btn-primary-custom:hover, .btn-primary-custom:active { 
-    background-color: var(--blue-main); 
-    color: var(--white);
-    transform: translateY(-2px); 
-  }
-  
-  .btn-gold {
-    background-color: var(--gold);
-    color: var(--white);
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    min-height: 44px;
-  }
-  .btn-gold:hover, .btn-gold:active { 
-    background-color: var(--gold-dark); 
-    color: var(--white);
-    transform: translateY(-2px); 
-  }
-  
-  .btn-white {
-    background-color: var(--white);
-    color: var(--blue-deep);
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    font-weight: 400;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    min-height: 44px;
-  }
-  .btn-white:hover, .btn-white:active { 
-    background-color: var(--gold); 
-    color: var(--white);
-  }
-  
-  .card-benefit {
-    background: var(--white);
-    border: 1px solid var(--blue-light);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.4s ease;
-    height: 100%;
-  }
-  .card-benefit:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(30,58,95,0.12);
-    border-color: var(--gold);
-  }
-  
-  .icon-circle {
-    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-main) 100%);
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .fade-in { 
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: all 0.8s ease; 
-  }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
-  
-  .nav-blur { 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.95); 
-  }
-  
-  .price-tag {
-    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-main) 100%);
-    box-shadow: 0 10px 30px rgba(30,58,95,0.3);
-    border-radius: 16px;
-    padding: 20px 32px;
-  }
-  
-  .divider {
-    width: 60px; height: 2px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-    margin: 0 auto;
-  }
-  
-  .scroll-indicator { animation: bounce 2s infinite; }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(10px); }
-  }
-  
-  .pulse-dot { animation: pulse 2s infinite; }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  
-  /* Carrusel */
-  .carousel-container { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 12px;
-  }
-  .carousel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    touch-action: pan-y;
-  }
-  .carousel-slide { 
-    min-width: 100%; 
-    position: relative; 
-  }
-  .carousel-slide img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
-    display: block;
-  }
-  
-  .carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.95);
-    border: 1px solid var(--blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-    color: var(--blue-deep);
-    padding: 0;
-  }
-  .carousel-btn:hover, .carousel-btn:active {
-    background: var(--gold);
-    color: var(--white);
-    border-color: var(--gold);
-  }
-  .carousel-btn.prev { left: 10px; }
-  .carousel-btn.next { right: 10px; }
-  
-  .carousel-dots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 16px;
-  }
-  .carousel-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--blue-light);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0;
-  }
-  .carousel-dot.active {
-    background: var(--gold);
-    width: 24px;
-    border-radius: 4px;
-  }
-  
-  .gallery-card {
-    background: var(--white);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(30,58,95,0.08);
-    border: 1px solid var(--blue-light);
-    transition: all 0.4s ease;
-    height: 100%;
-  }
-  .gallery-card:hover {
-    box-shadow: 0 12px 40px rgba(30,58,95,0.15);
-    transform: translateY(-4px);
-  }
-  
-  .gallery-title {
-    position: relative;
-    padding-bottom: 12px;
-    display: inline-block;
-  }
-  .gallery-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--gold);
-  }
-  
-  .feature-list { list-style: none; padding-left: 0; }
-  .feature-list li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 8px;
-  }
-  .feature-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 8px;
-    height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-  
-  .stat-box {
-    padding: 16px 20px;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-soft);
-    margin-bottom: 4px;
-  }
-  .stat-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.75rem;
-    font-weight: 300;
-    color: var(--blue-deep);
-  }
-  
-  /* Mobile optimizations */
-  @media (max-width: 767.98px) {
-    .hero-bg { min-height: 100vh; }
-    .hero-title { font-size: 2.5rem !important; }
-    .section-title { font-size: 2rem !important; }
-    .price-tag { padding: 16px 24px; }
-    .carousel-container { height: 260px !important; }
-    .stat-box { padding: 12px 16px; }
-    .stat-value { font-size: 1.5rem; }
-  }
-  
-  @media (min-width: 768px) {
-    .hero-title { font-size: 4rem; }
-    .section-title { font-size: 3rem; }
-    .carousel-container { height: 320px !important; }
-  }
-  
-  @media (min-width: 992px) {
-    .hero-title { font-size: 5rem; }
-  }
-  
-  /* Safe area for iOS */
-  @supports (padding-top: env(safe-area-inset-top)) {
-    .navbar-custom {
-      padding-top: calc(1rem + env(safe-area-inset-top));
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="theme-color" content="#1e3a5f" />
+  <title>MeridaCampestre | Tu Nueva Casa en Mérida, Yucatán</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/300.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/outfit@5.0.0/500.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.0/300.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.0/400.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom nav-blur border-bottom border-blue-light">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
-      <div class="bg-blue-deep rounded-1 d-flex align-items-center justify-content-center" style="width:36px;height:36px;">
-        <span class="font-display text-white fw-bold" style="font-size:1.25rem;">M</span>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom nav-blur border-bottom border-blue-light">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+        <div class="bg-blue-deep rounded-1 d-flex align-items-center justify-content-center"
+          style="width: 36px; height: 36px">
+          <span class="font-display text-white fw-bold" style="font-size: 1.25rem">M</span>
+        </div>
+        <span class="font-display text-blue-deep" style="font-size: 1.25rem">Merida<span
+            class="text-gold">Campestre</span></span>
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-4">
+          <li class="nav-item">
+            <a class="nav-link text-blue-deep" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-blue-deep" href="#beneficios">Beneficios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-blue-deep" href="#galeria">Galería</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-blue-deep" href="#ficha">Ficha Técnica</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-blue-deep" href="#contacto">Contacto</a>
+          </li>
+        </ul>
+     
       </div>
-      <span class="font-display text-blue-deep" style="font-size:1.25rem;">Merida<span class="text-gold">Campestre</span></span>
-    </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-4">
-        <li class="nav-item"><a class="nav-link text-blue-deep" href="#inicio">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link text-blue-deep" href="#beneficios">Beneficios</a></li>
-        <li class="nav-item"><a class="nav-link text-blue-deep" href="#galeria">Galería</a></li>
-        <li class="nav-item"><a class="nav-link text-blue-deep" href="#ficha">Ficha Técnica</a></li>
-        <li class="nav-item"><a class="nav-link text-blue-deep" href="#contacto">Contacto</a></li>
-      </ul>
-      <a href="#contacto" class="btn btn-primary-custom ms-lg-3 mt-2 mt-lg-0">Agendar Visita</a>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- Hero -->
-<section id="inicio" class="hero-bg d-flex align-items-center pt-5">
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10 text-center text-white fade-in">
-        <h1 class="font-display hero-title fw-light lh-sm mb-4">
-          Tu nueva casa<br/>
-          <span class="text-white fst-italic">en el corazón de Mérida</span>
-        </h1>
-        <p class="lead mx-auto mb-4 px-3" style="max-width:640px; font-weight:300; opacity:0.95;">
-          Ubicada en una de las mejores y más antiguas colonias de Mérida, Yucatán. Una residencia que combina el encanto colonial con el lujo contemporáneo, rodeada de historia, naturaleza y comodidad.
+  <!-- Hero -->
+  <section id="inicio" class="hero-bg d-flex align-items-center pt-5">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 text-center text-white fade-in">
+          <h1 class="font-display hero-title fw-light lh-sm mb-4">
+            Tu nueva casa<br />
+            <span class="text-white fst-italic">en el corazón de Mérida</span>
+          </h1>
+          <p class="lead mx-auto mb-4 px-3" style="max-width: 640px; font-weight: 300; opacity: 0.95">
+            Ubicada en una de las mejores y más antiguas colonias de Mérida,
+            Yucatán. Una residencia que combina el encanto colonial con el
+            lujo contemporáneo, rodeada de historia, naturaleza y comodidad.
+          </p>
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mt-4 px-3">
+            <div class="price-tag text-white text-center">
+              <div class="small text-uppercase" style="
+                    letter-spacing: 0.15em;
+                    opacity: 0.85;
+                    font-size: 0.7rem;
+                  ">
+                Precio
+              </div>
+              <div class="font-display fw-light" style="font-size: 1.75rem">
+                $18,000,000 <span style="font-size: 0.9rem">MXN</span>
+              </div>
+            </div>
+            <a href="#contacto" class="btn btn-white mt-2 mt-md-0">Solicitar Información</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 scroll-indicator">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section id="beneficios" class="py-5 bg-blue-pale">
+    <div class="container py-4">
+      <div class="text-center mb-4 fade-in">
+        <span class="text-gold text-uppercase small fw-medium" style="letter-spacing: 0.25em">Ventajas exclusivas</span>
+        <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">
+          ¿Por qué esta casa?
+        </h2>
+        <div class="divider mb-3"></div>
+        <p class="text-soft mx-auto" style="max-width: 600px; color: var(--text-soft); font-weight: 300">
+          Una ubicación privilegiada que te ofrece todo lo que necesitas,
+          rodeado de historia, cultura y servicios de primer nivel.
         </p>
-        <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 mt-4 px-3">
-          <div class="price-tag text-white text-center">
-            <div class="small text-uppercase" style="letter-spacing:0.15em; opacity:0.85; font-size:0.7rem;">Precio</div>
-            <div class="font-display fw-light" style="font-size:1.75rem;">$18,000,000 <span style="font-size:0.9rem;">MXN</span></div>
-          </div>
-          <a href="#contacto" class="btn btn-white mt-2 mt-md-0">Solicitar Información</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 scroll-indicator">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
-  </div>
-</section>
-
-<!-- Beneficios -->
-<section id="beneficios" class="py-5 bg-blue-pale">
-  <div class="container py-4">
-    <div class="text-center mb-4 fade-in">
-      <span class="text-gold text-uppercase small fw-medium" style="letter-spacing:0.25em;">Ventajas exclusivas</span>
-      <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">¿Por qué esta casa?</h2>
-      <div class="divider mb-3"></div>
-      <p class="text-soft mx-auto" style="max-width:600px; color:var(--text-soft); font-weight:300;">Una ubicación privilegiada que te ofrece todo lo que necesitas, rodeado de historia, cultura y servicios de primer nivel.</p>
-    </div>
-
-    <div class="row g-3 g-md-4">
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 12l10 5 10-5M2 17l10 5 10-5"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Ubicación Privilegiada</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">En una de las colonias más antiguas y exclusivas de Mérida, con calles arboladas, seguridad y ambiente residencial de alto nivel.</p>
-        </div>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Plazas y Centros Comerciales</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">A pocos minutos de las principales plazas comerciales, boutiques, restaurantes y opciones de entretenimiento de la ciudad.</p>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Hospitales Cercanos</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">Rodeada de los mejores hospitales y clínicas de la ciudad, garantizando atención médica de primer nivel a tu alcance.</p>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4 8 4v14M9 9h.01M9 12h.01M9 15h.01M9 18h.01M15 9h.01M15 12h.01M15 15h.01M15 18h.01"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Centro Histórico</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">A minutos del centro histórico de Mérida, con acceso a la Catedral, Paseo de Montejo, museos, teatros y la vibrante vida cultural.</p>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Aeropuerto Cercano</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">Conexión rápida al Aeropuerto Internacional de Mérida, con vuelos directos a las principales ciudades de México y el mundo.</p>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-6 col-lg-4 fade-in">
-        <div class="card-benefit">
-          <div class="icon-circle mb-3">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size:1.25rem;">Zona Residencial Exclusiva</h3>
-          <p class="mb-0 small" style="color:var(--text-soft); font-weight:300;">Vecindario tranquilo y seguro, con vecinos distinguidos, áreas verdes y la tranquilidad que caracteriza a las mejores zonas de Mérida.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Galería -->
-<section id="galeria" class="py-5 bg-white">
-  <div class="container py-4">
-    <div class="text-center mb-4 fade-in">
-      <span class="text-gold text-uppercase small fw-medium" style="letter-spacing:0.25em;">Recorrido visual</span>
-      <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">Galería de la Residencia</h2>
-      <div class="divider mb-3"></div>
-      <p class="mx-auto" style="max-width:600px; color:var(--text-soft); font-weight:300;">Explora cada espacio de esta magnífica propiedad a través de nuestras fotografías.</p>
-    </div>
-
-    <div class="row g-4">
-      <!-- Carrusel Fachada -->
-      <div class="col-12 col-md-6 fade-in">
-        <div class="gallery-card" data-carousel="fachada">
-          <div class="p-3 pb-2">
-            <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Fachada</h3>
-          </div>
-          <div class="carousel-container" style="height:280px;">
-            <div class="carousel-track">
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/15c27468d-0cbf-4468-b409-e8ff5867f57d.png" alt="Fachada principal"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/126bfcdab-4846-4639-afaf-2ef0e5b409d6.png" alt="Vista lateral fachada"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/100034839-eeef-45ba-b4b7-31b2bdbad37e.png" alt="Arcos coloniales"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1ff01d74d-fbe4-4ddf-8244-6b77a6b35e38.png" alt="Puerta principal"/></div>
+      <div class="row g-3 g-md-4">
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 12l10 5 10-5M2 17l10 5 10-5" />
+              </svg>
             </div>
-            <button class="carousel-btn prev" aria-label="Anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="carousel-btn next" aria-label="Siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Ubicación Privilegiada
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              En una de las colonias más antiguas y exclusivas de Mérida, con
+              calles arboladas, seguridad y ambiente residencial de alto
+              nivel.
+            </p>
           </div>
-          <div class="carousel-dots"></div>
         </div>
-      </div>
 
-      <!-- Carrusel Planta Baja -->
-      <div class="col-12 col-md-6 fade-in">
-        <div class="gallery-card" data-carousel="planta-baja">
-          <div class="p-3 pb-2">
-            <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Planta Baja</h3>
-          </div>
-          <div class="carousel-container" style="height:280px;">
-            <div class="carousel-track">
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1a5f6a724-3ea6-49c6-a9bf-1ae55ea96deb.png" alt="Sala principal"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/11d38e09c-4975-4562-b189-1c02d6938e70.png" alt="Comedor"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1e7f99668-9d91-4ed8-82b8-17533c68109e.png" alt="Sala colonial"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1cfab516c-1e92-446c-a0c2-88cd7bad1d23.png" alt="Comedor elegante"/></div>
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
             </div>
-            <button class="carousel-btn prev" aria-label="Anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="carousel-btn next" aria-label="Siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Plazas y Centros Comerciales
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              A pocos minutos de las principales plazas comerciales,
+              boutiques, restaurantes y opciones de entretenimiento de la
+              ciudad.
+            </p>
           </div>
-          <div class="carousel-dots"></div>
         </div>
-      </div>
 
-      <!-- Carrusel Planta Alta -->
-      <div class="col-12 col-md-6 fade-in">
-        <div class="gallery-card" data-carousel="planta-alta">
-          <div class="p-3 pb-2">
-            <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Planta Alta</h3>
-          </div>
-          <div class="carousel-container" style="height:280px;">
-            <div class="carousel-track">
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1b217d288-0f80-4c1b-a7b8-0789a6beccb5.png" alt="Recámara principal"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1ee449953-d722-41d8-9f8a-7a659f9c7177.png" alt="Terraza"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1056dcb8a-e84e-4a4b-91f7-32ff60009730.png" alt="Recámara elegante"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1abf54109-be75-4872-bdb5-36389d3d8fb7.png" alt="Terraza con vista"/></div>
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+              </svg>
             </div>
-            <button class="carousel-btn prev" aria-label="Anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="carousel-btn next" aria-label="Siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Hospitales Cercanos
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              Rodeada de los mejores hospitales y clínicas de la ciudad,
+              garantizando atención médica de primer nivel a tu alcance.
+            </p>
           </div>
-          <div class="carousel-dots"></div>
         </div>
-      </div>
 
-      <!-- Carrusel Piscina -->
-      <div class="col-12 col-md-6 fade-in">
-        <div class="gallery-card" data-carousel="piscina">
-          <div class="p-3 pb-2">
-            <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Piscina</h3>
-          </div>
-          <div class="carousel-container" style="height:280px;">
-            <div class="carousel-track">
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1074c330f-1849-46fe-a382-dfb9783c7acd.png" alt="Piscina principal"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/105525ad1-aac9-4996-a90e-87d38f7a4b4a.png" alt="Piscina al atardecer"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/14187fde4-a6ba-44ce-b559-d8359eb55f0a.png" alt="Piscina tropical"/></div>
-              <div class="carousel-slide"><img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1e5f15a63-1e37-4c7e-bc61-0e4da4837daa.png" alt="Piscina al atardecer"/></div>
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <path
+                  d="M3 21h18M5 21V7l8-4 8 4v14M9 9h.01M9 12h.01M9 15h.01M9 18h.01M15 9h.01M15 12h.01M15 15h.01M15 18h.01" />
+              </svg>
             </div>
-            <button class="carousel-btn prev" aria-label="Anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="carousel-btn next" aria-label="Siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Centro Histórico
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              A minutos del centro histórico de Mérida, con acceso a la
+              Catedral, Paseo de Montejo, museos, teatros y la vibrante vida
+              cultural.
+            </p>
           </div>
-          <div class="carousel-dots"></div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" />
+              </svg>
+            </div>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Aeropuerto Cercano
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              Conexión rápida al Aeropuerto Internacional de Mérida, con
+              vuelos directos a las principales ciudades de México y el mundo.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 fade-in">
+          <div class="card-benefit">
+            <div class="icon-circle mb-3">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+            <h3 class="font-display fw-medium text-blue-deep mb-2" style="font-size: 1.25rem">
+              Zona Residencial Exclusiva
+            </h3>
+            <p class="mb-0 small" style="color: var(--text-soft); font-weight: 300">
+              Vecindario tranquilo y seguro, con vecinos distinguidos, áreas
+              verdes y la tranquilidad que caracteriza a las mejores zonas de
+              Mérida.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Ficha Técnica -->
-<section id="ficha" class="py-5 bg-blue-pale">
-  <div class="container py-4">
-    <div class="text-center mb-4 fade-in">
-      <span class="text-gold text-uppercase small fw-medium" style="letter-spacing:0.25em;">Detalles de la propiedad</span>
-      <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">Ficha Técnica</h2>
-      <div class="divider"></div>
-    </div>
-
-    <div class="row g-4 g-lg-5 align-items-start">
-      <!-- Imagen -->
-      <div class="col-12 col-lg-6 fade-in">
-        <div class="position-relative">
-          <div class="rounded-4 overflow-hidden shadow-lg">
-            <img src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/126bfcdab-4846-4639-afaf-2ef0e5b409d6.png" alt="Casa MeridaCampestre" class="w-100" style="height:auto; max-height:500px; object-fit:cover;"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- Descripción -->
-      <div class="col-12 col-lg-6 fade-in">
-        <h3 class="font-display fw-light text-blue-deep mb-3" style="font-size:1.75rem;">Distribución completa de la residencia</h3>
-        <p class="mb-4" style="color:var(--text-soft); font-weight:300;">
-          Una propiedad de dos plantas diseñada para ofrecer comodidad, elegancia y espacios pensados para el disfrute familiar y el entretenimiento. Cada rincón refleja el encanto colonial yucateco con acabados de lujo.
+  <!-- Galería -->
+  <section id="galeria" class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="text-center mb-4 fade-in">
+        <span class="text-gold text-uppercase small fw-medium" style="letter-spacing: 0.25em">Recorrido visual</span>
+        <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">
+          Galería de la Residencia
+        </h2>
+        <div class="divider mb-3"></div>
+        <p class="mx-auto" style="max-width: 600px; color: var(--text-soft); font-weight: 300">
+          Explora cada espacio de esta magnífica propiedad a través de
+          nuestras fotografías.
         </p>
+      </div>
 
-        <div class="mb-4">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="bg-blue-deep rounded-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 21h18M5 21V7l8-4 8 4v14"/></svg>
+      <div class="row g-4">
+        <!-- Carrusel Fachada -->
+        <div class="col-12 col-md-6 fade-in">
+          <div class="gallery-card" data-carousel="fachada">
+            <div class="p-3 pb-2">
+              <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Fachada
+              </h3>
             </div>
-            <h4 class="font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Planta Baja</h4>
-          </div>
-          <ul class="feature-list" style="color:var(--text-soft); font-weight:300;">
-            <li>1 sala principal</li>
-            <li>1 comedor</li>
-            <li>1 desayunador</li>
-            <li>1 cocina equipada</li>
-            <li>2 recámaras</li>
-            <li>1 baño completo</li>
-            <li>1 cuarto de servicio con baño completo</li>
-            <li>1 recibidor en la puerta principal</li>
-            <li>1 sala de estar entre las recámaras</li>
-            <li>1 salón de fiestas o eventos</li>
-            <li>1 bodega con zona de lavado de ropa</li>
-            <li>1 piscina (10 m x 4 m)</li>
-            <li>1 baño completo para la piscina</li>
-            <li>1 jardín en el patio junto a la piscina</li>
-            <li>1 zona de tendedero de ropa</li>
-            <li>1 garaje para tres autos</li>
-            <li>1 jardín exterior</li>
-          </ul>
-        </div>
-
-        <div class="mb-4">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <div class="bg-blue-deep rounded-2 d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+            <div class="carousel-container" style="height: 280px">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/15c27468d-0cbf-4468-b409-e8ff5867f57d.png"
+                    alt="Fachada principal" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/126bfcdab-4846-4639-afaf-2ef0e5b409d6.png"
+                    alt="Vista lateral fachada" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/100034839-eeef-45ba-b4b7-31b2bdbad37e.png"
+                    alt="Arcos coloniales" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1ff01d74d-fbe4-4ddf-8244-6b77a6b35e38.png"
+                    alt="Puerta principal" />
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="carousel-btn next" aria-label="Siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
             </div>
-            <h4 class="font-display fw-medium text-blue-deep mb-0" style="font-size:1.5rem;">Planta Alta</h4>
+            <div class="carousel-dots"></div>
           </div>
-          <ul class="feature-list" style="color:var(--text-soft); font-weight:300;">
-            <li>3 recámaras con baños completos</li>
-            <li>1 sala de estar</li>
-            <li>2 terrazas al aire libre</li>
-          </ul>
         </div>
 
-        <div class="row g-2 pt-3 border-top border-blue-light">
-          <div class="col-6 col-sm-3 stat-box">
-            <div class="stat-label">Recámaras</div>
-            <div class="stat-value">5</div>
+        <!-- Carrusel Planta Baja -->
+        <div class="col-12 col-md-6 fade-in">
+          <div class="gallery-card" data-carousel="planta-baja">
+            <div class="p-3 pb-2">
+              <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Planta Baja
+              </h3>
+            </div>
+            <div class="carousel-container" style="height: 280px">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1a5f6a724-3ea6-49c6-a9bf-1ae55ea96deb.png"
+                    alt="Sala principal" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/11d38e09c-4975-4562-b189-1c02d6938e70.png"
+                    alt="Comedor" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1e7f99668-9d91-4ed8-82b8-17533c68109e.png"
+                    alt="Sala colonial" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1cfab516c-1e92-446c-a0c2-88cd7bad1d23.png"
+                    alt="Comedor elegante" />
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="carousel-btn next" aria-label="Siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+            <div class="carousel-dots"></div>
           </div>
-          <div class="col-6 col-sm-3 stat-box">
-            <div class="stat-label">Baños</div>
-            <div class="stat-value">5+</div>
+        </div>
+
+        <!-- Carrusel Planta Alta -->
+        <div class="col-12 col-md-6 fade-in">
+          <div class="gallery-card" data-carousel="planta-alta">
+            <div class="p-3 pb-2">
+              <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Planta Alta
+              </h3>
+            </div>
+            <div class="carousel-container" style="height: 280px">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1b217d288-0f80-4c1b-a7b8-0789a6beccb5.png"
+                    alt="Recámara principal" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1ee449953-d722-41d8-9f8a-7a659f9c7177.png"
+                    alt="Terraza" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1056dcb8a-e84e-4a4b-91f7-32ff60009730.png"
+                    alt="Recámara elegante" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1abf54109-be75-4872-bdb5-36389d3d8fb7.png"
+                    alt="Terraza con vista" />
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="carousel-btn next" aria-label="Siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+            <div class="carousel-dots"></div>
           </div>
-          <div class="col-6 col-sm-3 stat-box">
-            <div class="stat-label">Estacionamiento</div>
-            <div class="stat-value">3</div>
-          </div>
-          <div class="col-6 col-sm-3 stat-box">
-            <div class="stat-label">Piscina</div>
-            <div class="stat-value">10×4</div>
+        </div>
+
+        <!-- Carrusel Piscina -->
+        <div class="col-12 col-md-6 fade-in">
+          <div class="gallery-card" data-carousel="piscina">
+            <div class="p-3 pb-2">
+              <h3 class="gallery-title font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Piscina
+              </h3>
+            </div>
+            <div class="carousel-container" style="height: 280px">
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1074c330f-1849-46fe-a382-dfb9783c7acd.png"
+                    alt="Piscina principal" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/105525ad1-aac9-4996-a90e-87d38f7a4b4a.png"
+                    alt="Piscina al atardecer" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/14187fde4-a6ba-44ce-b559-d8359eb55f0a.png"
+                    alt="Piscina tropical" />
+                </div>
+                <div class="carousel-slide">
+                  <img
+                    src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/1e5f15a63-1e37-4c7e-bc61-0e4da4837daa.png"
+                    alt="Piscina al atardecer" />
+                </div>
+              </div>
+              <button class="carousel-btn prev" aria-label="Anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="carousel-btn next" aria-label="Siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+            <div class="carousel-dots"></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CTA / Contacto -->
-<section id="contacto" class="py-5 bg-blue-deep text-white position-relative overflow-hidden">
-  <div class="position-absolute top-0 start-0 w-100 h-100" style="opacity:0.1; background-image: radial-gradient(circle at 20% 50%, var(--gold) 0%, transparent 50%);"></div>
-  <div class="container py-4 position-relative">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10 text-center fade-in">
-        <span class="text-gold text-uppercase small fw-medium" style="letter-spacing:0.25em;">Agenda tu visita</span>
-        <h2 class="font-display fw-light mt-2 mb-3" style="font-size:2rem;">¿Listo para conocer tu nueva casa?</h2>
-        <p class="mx-auto mb-4" style="max-width:600px; color:rgba(255,255,255,0.75); font-weight:300;">Contáctanos hoy mismo y agenda una visita privada. Esta propiedad exclusiva no estará disponible por mucho tiempo.</p>
-        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center px-3">
-          <a href="tel:+529991234567" class="btn btn-gold d-inline-flex align-items-center justify-content-center gap-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            Llamar Ahora
-          </a>
-          <a href="https://wa.me/529991234567" class="btn btn-white d-inline-flex align-items-center justify-content-center gap-2">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            WhatsApp
-          </a>
-        </div>
-        <div class="mt-4 pt-4 border-top d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 small" style="border-color:rgba(255,255,255,0.15) !important; color:rgba(255,255,255,0.65); font-weight:300;">
-          <div class="d-flex align-items-center gap-2">
-            <div class="rounded-circle bg-success" style="width:8px;height:8px;"></div>
-            <span>Disponible para visita</span>
+  <!-- Ficha Técnica -->
+  <section id="ficha" class="py-5 bg-blue-pale">
+    <div class="container py-4">
+      <div class="text-center mb-4 fade-in">
+        <span class="text-gold text-uppercase small fw-medium" style="letter-spacing: 0.25em">Detalles de la
+          propiedad</span>
+        <h2 class="font-display section-title fw-light text-blue-deep mt-2 mb-3">
+          Ficha Técnica
+        </h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="row g-4 g-lg-5 align-items-start">
+        <!-- Imagen -->
+        <div class="col-12 col-lg-6 fade-in">
+          <div class="position-relative">
+            <div class="rounded-4 overflow-hidden shadow-lg">
+              <img
+                src="https://image.qwenlm.ai/public_source/6cf25e87-b063-4405-871f-7ea7b1f51964/126bfcdab-4846-4639-afaf-2ef0e5b409d6.png"
+                alt="Casa MeridaCampestre" class="w-100" style="height: auto; max-height: 500px; object-fit: cover" />
+            </div>
           </div>
-          <div>📍 Mérida, Yucatán, México</div>
-          <div> $18,000,000 MXN</div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="col-12 col-lg-6 fade-in">
+          <h3 class="font-display fw-light text-blue-deep mb-3" style="font-size: 1.75rem">
+            Distribución completa de la residencia
+          </h3>
+          <p class="mb-4" style="color: var(--text-soft); font-weight: 300">
+            Una propiedad de dos plantas diseñada para ofrecer comodidad,
+            elegancia y espacios pensados para el disfrute familiar y el
+            entretenimiento. Cada rincón refleja el encanto colonial yucateco
+            con acabados de lujo.
+          </p>
+
+          <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="bg-blue-deep rounded-2 d-flex align-items-center justify-content-center"
+                style="width: 40px; height: 40px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                  <path d="M3 21h18M5 21V7l8-4 8 4v14" />
+                </svg>
+              </div>
+              <h4 class="font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Planta Baja
+              </h4>
+            </div>
+            <ul class="feature-list" style="color: var(--text-soft); font-weight: 300">
+              <li>1 sala principal</li>
+              <li>1 comedor</li>
+              <li>1 desayunador</li>
+              <li>1 cocina equipada</li>
+              <li>2 recámaras</li>
+              <li>1 baño completo</li>
+              <li>1 cuarto de servicio con baño completo</li>
+              <li>1 recibidor en la puerta principal</li>
+              <li>1 sala de estar entre las recámaras</li>
+              <li>1 salón de fiestas o eventos</li>
+              <li>1 bodega con zona de lavado de ropa</li>
+              <li>1 piscina (10 m x 4 m)</li>
+              <li>1 baño completo para la piscina</li>
+              <li>1 jardín en el patio junto a la piscina</li>
+              <li>1 zona de tendedero de ropa</li>
+              <li>1 garaje para tres autos</li>
+              <li>1 jardín exterior</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="bg-blue-deep rounded-2 d-flex align-items-center justify-content-center"
+                style="width: 40px; height: 40px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
+                  <path d="M3 12l9-9 9 9M5 10v10h14V10" />
+                </svg>
+              </div>
+              <h4 class="font-display fw-medium text-blue-deep mb-0" style="font-size: 1.5rem">
+                Planta Alta
+              </h4>
+            </div>
+            <ul class="feature-list" style="color: var(--text-soft); font-weight: 300">
+              <li>3 recámaras con baños completos</li>
+              <li>1 sala de estar</li>
+              <li>2 terrazas al aire libre</li>
+            </ul>
+          </div>
+
+          <div class="row g-2 pt-3 border-top border-blue-light">
+            <div class="col-6 col-sm-3 stat-box">
+              <div class="stat-label">Recámaras</div>
+              <div class="stat-value">5</div>
+            </div>
+            <div class="col-6 col-sm-3 stat-box">
+              <div class="stat-label">Baños</div>
+              <div class="stat-value">5+</div>
+            </div>
+            <div class="col-6 col-sm-3 stat-box">
+              <div class="stat-label">Estacionamiento</div>
+              <div class="stat-value">3</div>
+            </div>
+            <div class="col-6 col-sm-3 stat-box">
+              <div class="stat-label">Piscina</div>
+              <div class="stat-value">10×4</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Footer -->
-<footer class="py-4 text-white-50" style="background-color:#0f1d30;">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
-        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
-          <div class="bg-blue-deep rounded-1 d-flex align-items-center justify-content-center" style="width:32px;height:32px;">
-            <span class="font-display text-white fw-bold">M</span>
+  <!-- CTA / Contacto -->
+  <section id="contacto" class="py-5 bg-blue-deep text-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="
+          opacity: 0.1;
+          background-image: radial-gradient(
+            circle at 20% 50%,
+            var(--gold) 0%,
+            transparent 50%
+          );
+        "></div>
+    <div class="container py-4 position-relative">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 text-center fade-in">
+          <span class="text-gold text-uppercase small fw-medium" style="letter-spacing: 0.25em">Agenda tu visita</span>
+          <h2 class="font-display fw-light mt-2 mb-3" style="font-size: 2rem">
+            ¿Listo para conocer tu nueva casa?
+          </h2>
+          <p class="mx-auto mb-4" style="
+                max-width: 600px;
+                color: rgba(255, 255, 255, 0.75);
+                font-weight: 300;
+              ">
+            Contáctanos hoy mismo y agenda una visita privada. Esta propiedad
+            exclusiva no estará disponible por mucho tiempo.
+          </p>
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center px-3">
+            <a href="tel:+529991733981"
+              class="btn btn-gold d-inline-flex align-items-center justify-content-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+              </svg>
+              Llamar Ahora
+            </a>
+            <a href="https://wa.me/529991733981"
+              class="btn btn-white d-inline-flex align-items-center justify-content-center gap-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+              </svg>
+              WhatsApp
+            </a>
           </div>
-          <span class="font-display text-white">Merida<span class="text-gold">Campestre</span></span>
+          <div
+            class="mt-4 pt-4 border-top d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 small"
+            style="
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                color: rgba(255, 255, 255, 0.65);
+                font-weight: 300;
+              ">
+            <div class="d-flex align-items-center gap-2">
+              <div class="rounded-circle bg-success" style="width: 8px; height: 8px"></div>
+              <span>Disponible para visita</span>
+            </div>
+            <div>📍 Mérida, Yucatán, México</div>
+            <div>$18,000,000 MXN</div>
+          </div>
         </div>
       </div>
-      <div class="col-12 col-md-6 text-center text-md-end small" style="font-weight:300;">© 2026 MeridaCampestre. Todos los derechos reservados.</div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Fade-in on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  <!-- Footer -->
+  <footer class="py-4 text-white-50" style="background-color: #0f1d30">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
+            <div class="bg-blue-deep rounded-1 d-flex align-items-center justify-content-center"
+              style="width: 32px; height: 32px">
+              <span class="font-display text-white fw-bold">M</span>
+            </div>
+            <span class="font-display text-white">Merida<span class="text-gold">Campestre</span></span>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-end small" style="font-weight: 300">
+          © 2026 MeridaCampestre. Todos los derechos reservados.
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        const navHeight = document.querySelector('.navbar').offsetHeight;
-        const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-        window.scrollTo({ top: targetPos, behavior: 'smooth' });
-        // Close mobile menu
-        const navCollapse = document.getElementById('navMenu');
-        if (navCollapse.classList.contains('show')) {
-          bootstrap.Collapse.getInstance(navCollapse)?.hide();
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+    );
+    document
+      .querySelectorAll(".fade-in")
+      .forEach((el) => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          const navHeight = document.querySelector(".navbar").offsetHeight;
+          const targetPos =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            navHeight;
+          window.scrollTo({ top: targetPos, behavior: "smooth" });
+          // Close mobile menu
+          const navCollapse = document.getElementById("navMenu");
+          if (navCollapse.classList.contains("show")) {
+            bootstrap.Collapse.getInstance(navCollapse)?.hide();
+          }
         }
-      }
-    });
-  });
-
-  // Carruseles
-  document.querySelectorAll('[data-carousel]').forEach(card => {
-    const track = card.querySelector('.carousel-track');
-    const slides = track.querySelectorAll('.carousel-slide');
-    const dotsContainer = card.querySelector('.carousel-dots');
-    const prevBtn = card.querySelector('.carousel-btn.prev');
-    const nextBtn = card.querySelector('.carousel-btn.next');
-    const totalSlides = slides.length;
-    let currentIndex = 0;
-    let autoPlayInterval;
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    // Crear dots
-    slides.forEach((_, idx) => {
-      const dot = document.createElement('button');
-      dot.classList.add('carousel-dot');
-      if (idx === 0) dot.classList.add('active');
-      dot.setAttribute('aria-label', `Ir a slide ${idx + 1}`);
-      dot.addEventListener('click', () => goToSlide(idx));
-      dotsContainer.appendChild(dot);
-    });
-
-    const dots = dotsContainer.querySelectorAll('.carousel-dot');
-
-    function updateDots() {
-      dots.forEach((d, i) => {
-        d.classList.toggle('active', i === currentIndex);
       });
-    }
+    });
 
-    function goToSlide(idx) {
-      currentIndex = idx;
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      updateDots();
-      resetAutoPlay();
-    }
+    // Carruseles
+    document.querySelectorAll("[data-carousel]").forEach((card) => {
+      const track = card.querySelector(".carousel-track");
+      const slides = track.querySelectorAll(".carousel-slide");
+      const dotsContainer = card.querySelector(".carousel-dots");
+      const prevBtn = card.querySelector(".carousel-btn.prev");
+      const nextBtn = card.querySelector(".carousel-btn.next");
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+      let autoPlayInterval;
+      let touchStartX = 0;
+      let touchStartY = 0;
 
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      goToSlide(currentIndex);
-    }
+      // Crear dots
+      slides.forEach((_, idx) => {
+        const dot = document.createElement("button");
+        dot.classList.add("carousel-dot");
+        if (idx === 0) dot.classList.add("active");
+        dot.setAttribute("aria-label", `Ir a slide ${idx + 1}`);
+        dot.addEventListener("click", () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
 
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-      goToSlide(currentIndex);
-    }
+      const dots = dotsContainer.querySelectorAll(".carousel-dot");
 
-    function resetAutoPlay() {
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = setInterval(nextSlide, 5000);
-    }
-
-    prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); });
-    nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); });
-
-    // Auto-play
-    autoPlayInterval = setInterval(nextSlide, 5000);
-
-    // Pausar en hover
-    card.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-    card.addEventListener('mouseleave', resetAutoPlay);
-
-    // Touch swipe (iOS/Android)
-    track.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    track.addEventListener('touchend', (e) => {
-      const diffX = touchStartX - e.changedTouches[0].clientX;
-      const diffY = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX > 0) nextSlide();
-        else prevSlide();
+      function updateDots() {
+        dots.forEach((d, i) => {
+          d.classList.toggle("active", i === currentIndex);
+        });
       }
-    }, { passive: true });
-  });
-</script>
 
+      function goToSlide(idx) {
+        currentIndex = idx;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        updateDots();
+        resetAutoPlay();
+      }
+
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        goToSlide(currentIndex);
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        goToSlide(currentIndex);
+      }
+
+      function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(nextSlide, 5000);
+      }
+
+      prevBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        prevSlide();
+      });
+      nextBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        nextSlide();
+      });
+
+      // Auto-play
+      autoPlayInterval = setInterval(nextSlide, 5000);
+
+      // Pausar en hover
+      card.addEventListener("mouseenter", () =>
+        clearInterval(autoPlayInterval),
+      );
+      card.addEventListener("mouseleave", resetAutoPlay);
+
+      // Touch swipe (iOS/Android)
+      track.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        },
+        { passive: true },
+      );
+
+      track.addEventListener(
+        "touchend",
+        (e) => {
+          const diffX = touchStartX - e.changedTouches[0].clientX;
+          const diffY = touchStartY - e.changedTouches[0].clientY;
+          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) nextSlide();
+            else prevSlide();
+          }
+        },
+        { passive: true },
+      );
+    });
+  </script>
 </body>
+
 </html>
