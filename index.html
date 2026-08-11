@@ -1,252 +1,766 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                /* =========================================================
+   styles.css — méridacampestre
+   Minimalista: azul marino, blanco y detalles azules.
+   Tipografías: Cormorant Garamond (títulos formales, delgados)
+   + Libre Franklin (texto). Sin animaciones continuas.
+   ========================================================= */
+
+:root{
+  --blanco:#ffffff;
+  --hielo:#f5f8fb;
+  --niebla:#e4ecf4;
+  --navy:#0e2740;
+  --navy-2:#14365a;
+  --navy-3:#0a1c30;
+  --azul:#2b5f94;
+  --tinta:#132538;
+  --suave:#52677d;
+  --whats:#1ebe5d;
+  --whats-osc:#17a34f;
+  --linea:rgba(14,39,64,.13);
+  --radio:16px;
+  --sombra:0 20px 50px -22px rgba(14,39,64,.28);
+  --fuente-titulo:'Cormorant Garamond',Georgia,serif;
+  --fuente-texto:'Libre Franklin',system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--fuente-texto);
+  background:var(--blanco);
+  color:var(--tinta);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--fuente-titulo);font-weight:500}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1180px,92%);margin:0 auto}
+
+/* ---------- BOTONES ---------- */
+.boton{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 26px;border-radius:999px;border:none;cursor:pointer;
+  font-family:var(--fuente-texto);font-weight:600;font-size:.95rem;letter-spacing:.02em;
+  transition:background-color .2s ease, transform .2s ease;
+}
+.boton:hover{transform:translateY(-2px)}
+.boton svg{width:20px;height:20px}
+.boton-whats{background:var(--whats);color:var(--blanco);box-shadow:0 14px 30px -12px rgba(0,0,0,.35)}
+.boton-whats:hover{background:var(--whats-osc)}
+.boton-blanco{background:var(--blanco);color:var(--navy)}
+.boton-blanco:hover{background:var(--hielo)}
+
+/* ---------- HEADER ---------- */
+.cabecera{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  padding:18px 0;
+  transition:background-color .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+.cabecera.fija{
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px -18px rgba(14,39,64,.3);
+  padding:10px 0;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.marca{display:flex;align-items:center;gap:12px}
+.marca-icono{
+  width:44px;height:44px;border-radius:10px;flex:none;
+  background:var(--navy);color:var(--blanco);
+  display:grid;place-items:center;
+  font-family:var(--fuente-titulo);font-weight:600;font-size:22px;
+}
+.marca-texto{
+  font-family:var(--fuente-titulo);font-weight:600;font-size:1.25rem;letter-spacing:.03em;
+  color:var(--blanco);transition:color .3s;line-height:1.1;
+}
+.marca-texto small{
+  display:block;font-family:var(--fuente-texto);font-weight:600;
+  font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;opacity:.7;
+}
+.cabecera.fija .marca-texto{color:var(--navy)}
+.nav-enlaces{display:flex;gap:6px;align-items:center}
+.nav-enlaces a{
+  font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--blanco);padding:8px 14px;border-radius:999px;
+  transition:background-color .2s ease;
+}
+.nav-enlaces a:hover{background:rgba(255,255,255,.16)}
+.cabecera.fija .nav-enlaces a{color:var(--navy)}
+.cabecera.fija .nav-enlaces a:hover{background:rgba(14,39,64,.08)}
+.nav-cta{background:var(--azul);color:var(--blanco) !important;padding:10px 20px !important}
+.nav-cta:hover{background:var(--navy-2)}
+.menu-boton{
+  display:none;background:none;border:none;cursor:pointer;
+  width:44px;height:44px;position:relative;
+}
+.menu-boton span,
+.menu-boton span::before,
+.menu-boton span::after{
+  content:"";display:block;width:24px;height:2px;background:var(--blanco);
+  position:absolute;left:10px;border-radius:2px;transition:background-color .3s;
+}
+.menu-boton span{top:21px}
+.menu-boton span::before{top:-7px;left:0}
+.menu-boton span::after{top:7px;left:0}
+.cabecera.fija .menu-boton span,
+.cabecera.fija .menu-boton span::before,
+.cabecera.fija .menu-boton span::after{background:var(--navy)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--blanco);overflow:hidden;background:var(--navy)}
+.hero-fondo{position:absolute;inset:0}
+.hero-fondo img{width:100%;height:100%;object-fit:cover}
+.hero-fondo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,28,48,.6) 0%,rgba(10,28,48,.15) 42%,rgba(10,28,48,.88) 100%);
+}
+.hero-contenido{position:relative;z-index:2;padding:170px 0 64px;width:100%}
+.hero-etiqueta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.1);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3);
+  padding:8px 18px;border-radius:999px;
+  font-size:.74rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+  margin-bottom:22px;
+}
+.punto{width:8px;height:8px;border-radius:50%;background:#4ade80;flex:none}
+.hero h1{
+  font-size:clamp(2.6rem,6vw,4.9rem);
+  font-weight:400;line-height:1.08;letter-spacing:0;
+  max-width:16ch;
+}
+.hero h1 em{font-style:italic;font-weight:500}
+.hero-sub{max-width:58ch;margin-top:18px;font-size:clamp(1rem,1.4vw,1.14rem);font-weight:300;color:rgba(255,255,255,.88)}
+.hero-sub strong{font-weight:600;color:var(--blanco)}
+.hero-datos{
+  margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);
+  background:rgba(255,255,255,.08);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.24);border-radius:var(--radio);
+  overflow:hidden;
+}
+.hero-datos div{padding:18px 22px;border-left:1px solid rgba(255,255,255,.18)}
+.hero-datos div:first-child{border-left:none}
+.hero-datos strong{display:block;font-family:var(--fuente-titulo);font-size:clamp(1.3rem,2.3vw,1.8rem);font-weight:500;color:var(--blanco);line-height:1.1}
+.hero-datos span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.75)}
+
+/* ---------- SECCIONES ---------- */
+section{padding:96px 0}
+.sec-cabecera{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+.sec-nota{max-width:38ch;color:var(--suave);font-weight:300}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.72rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--azul);margin-bottom:14px;
+}
+.kicker::before{content:"";width:34px;height:2px;background:var(--azul)}
+.titulo-seccion{font-size:clamp(2.1rem,4.2vw,3.2rem);font-weight:500;line-height:1.12}
+.titulo-seccion em{font-style:italic;color:var(--azul)}
+.texto-suave{color:var(--suave);font-weight:300;font-size:1.04rem}
+
+/* ---------- DOS COLUMNAS ---------- */
+.dos-columnas{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.col-texto p{color:var(--suave);margin-bottom:16px;font-size:1.02rem;font-weight:300}
+.col-texto p strong{color:var(--tinta);font-weight:600}
+.dos-columnas .col-texto .titulo-seccion{margin-bottom:22px}
+
+/* ---------- TARJETA IMAGEN ---------- */
+.tarjeta-imagen{position:relative;border-radius:var(--radio);overflow:hidden;box-shadow:var(--sombra)}
+.tarjeta-imagen img{width:100%;height:520px;object-fit:cover}
+.sello{
+  position:absolute;top:20px;left:20px;
+  background:var(--azul);color:var(--blanco);
+  font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:9px 18px;border-radius:999px;box-shadow:0 10px 24px -10px rgba(0,0,0,.35);
+}
+
+/* ---------- CARACTERÍSTICAS (solo azul) ---------- */
+.caracteristicas{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:70px}
+.tarjeta{
+  background:var(--hielo);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:30px 26px;position:relative;overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.tarjeta::before{
+  content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  background:var(--azul);
+}
+.tarjeta:hover{transform:translateY(-6px);box-shadow:var(--sombra)}
+.tarjeta-icono{
+  width:52px;height:52px;border-radius:12px;background:var(--blanco);
+  border:1px solid var(--linea);
+  display:grid;place-items:center;margin-bottom:18px;color:var(--azul);
+}
+.tarjeta-icono svg{width:26px;height:26px}
+.tarjeta h3{font-size:1.35rem;font-weight:600;margin-bottom:8px;color:var(--navy)}
+.tarjeta p{font-size:.92rem;color:var(--suave);font-weight:300}
+
+/* ---------- GALERÍA ---------- */
+#galeria{background:var(--hielo)}
+.galeria-grilla{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.foto{
+  position:relative;border-radius:var(--radio);overflow:hidden;cursor:zoom-in;
+  box-shadow:0 14px 40px -20px rgba(14,39,64,.3);background:var(--niebla);
+}
+.foto img{width:100%;height:340px;object-fit:cover;transition:transform .4s ease}
+.foto:hover img{transform:scale(1.05)}
+.foto figcaption{
+  position:absolute;inset:auto 0 0 0;padding:44px 22px 18px;
+  background:linear-gradient(180deg,transparent,rgba(10,28,48,.88));
+  color:var(--blanco);font-weight:600;font-size:.9rem;letter-spacing:.04em;
+}
+.foto-num{
+  position:absolute;top:16px;left:16px;
+  font-family:var(--fuente-titulo);font-weight:600;font-size:.95rem;
+  background:var(--blanco);color:var(--navy);width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;
+}
+
+/* ---------- VISOR (LIGHTBOX) ---------- */
+.visor{
+  position:fixed;inset:0;z-index:100;background:rgba(10,22,36,.94);
+  display:grid;place-items:center;padding:5vh 4vw;
+  opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s;
+}
+.visor.abierto{opacity:1;visibility:visible}
+.visor-caja img{max-width:min(960px,92vw);max-height:76vh;border-radius:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+.visor-caja p{color:var(--hielo);text-align:center;margin-top:16px;font-weight:500;letter-spacing:.05em}
+.visor-cerrar{
+  position:absolute;top:22px;right:26px;width:52px;height:52px;border-radius:50%;
+  background:var(--blanco);border:none;cursor:pointer;font-size:1.3rem;font-weight:700;color:var(--navy);
+  transition:transform .25s ease;
+}
+.visor-cerrar:hover{transform:rotate(90deg)}
+
+/* ---------- PLANO ---------- */
+.plano-tarjeta{
+  background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:26px;box-shadow:var(--sombra);position:relative;
+}
+.plano-tarjeta img{width:100%;border-radius:10px;border:1px solid var(--linea)}
+.esquina{position:absolute;width:26px;height:26px;border:3px solid var(--azul)}
+.esquina.tl{top:-8px;left:-8px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
+.esquina.tr{top:-8px;right:-8px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
+.esquina.bl{bottom:-8px;left:-8px;border-right:none;border-top:none;border-radius:0 0 0 8px}
+.esquina.br{bottom:-8px;right:-8px;border-left:none;border-top:none;border-radius:0 0 8px 0}
+.tabla{width:100%;border-collapse:collapse;margin:26px 0 0}
+.tabla tr{border-bottom:1px solid var(--linea)}
+.tabla td{padding:13px 4px;font-size:.97rem}
+.tabla td:first-child{font-weight:600;color:var(--navy)}
+.tabla td:last-child{text-align:right;color:var(--suave);font-weight:300}
+.tabla .fila-azul td{color:var(--azul);font-weight:700}
+
+/* ---------- UBICACIÓN ---------- */
+#ubicacion{background:var(--navy);color:var(--hielo)}
+#ubicacion .kicker{color:rgba(255,255,255,.7)}
+#ubicacion .kicker::before{background:rgba(255,255,255,.7)}
+#ubicacion .titulo-seccion em{color:var(--blanco)}
+.dos-columnas.ub{align-items:stretch}
+#ubicacion .col-texto p{color:rgba(245,248,251,.85)}
+.lista-check{list-style:none;margin-top:26px;display:grid;gap:14px}
+.lista-check li{display:flex;gap:14px;align-items:flex-start;font-weight:500}
+.check{
+  flex:none;width:26px;height:26px;border-radius:50%;
+  background:var(--azul);color:var(--blanco);
+  display:grid;place-items:center;font-weight:700;font-size:.8rem;margin-top:2px;
+}
+.mapa-tarjeta{
+  border-radius:var(--radio);overflow:hidden;
+  border:3px solid var(--azul);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.55);
+  min-height:440px;position:relative;background:var(--blanco);
+}
+.mapa-tarjeta iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---------- BANDA CTA ---------- */
+.banda-cta{background:var(--blanco);text-align:center}
+.cta-tarjeta{
+  background:linear-gradient(135deg,var(--navy-2),var(--navy-3));
+  border-radius:24px;padding:66px 8%;color:var(--blanco);
+  position:relative;overflow:hidden;
+  box-shadow:0 30px 70px -28px rgba(14,39,64,.65);
+}
+.cta-tarjeta h2{font-size:clamp(2rem,3.8vw,2.9rem);font-weight:500;line-height:1.15;max-width:22ch;margin:0 auto 14px}
+.cta-tarjeta p{font-weight:300;opacity:.9;max-width:52ch;margin:0 auto 32px}
+.cta-botones{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+
+/* ---------- FOOTER ---------- */
+.pie{background:var(--navy-3);color:var(--hielo);padding:64px 0 32px}
+.pie-arriba{
+  display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+  align-items:flex-start;padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.pie-marca{max-width:420px}
+.pie-marca p{color:rgba(245,248,251,.6);font-weight:300;margin-top:16px;font-size:.94rem}
+.pie-contacto{display:flex;flex-direction:column;gap:10px;min-width:260px;padding-top:8px}
+.pie-etiqueta{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,248,251,.55);font-weight:700}
+.pie-datos{display:grid;gap:6px;font-size:1rem;font-weight:400}
+.pie-datos a{color:rgba(245,248,251,.85);transition:color .2s ease}
+.pie-datos a:hover{color:var(--blanco)}
+.pie-abajo{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-top:26px;font-size:.82rem;color:rgba(245,248,251,.5);font-weight:300;
+}
+
+/* =========================================================
+   RESPONSIVE — todos los dispositivos
+   ========================================================= */
+
+/* Tablet horizontal / laptops pequeñas */
+@media (max-width:1100px){
+  .caracteristicas{grid-template-columns:repeat(2,1fr)}
+  .dos-columnas{gap:44px}
+}
+
+/* Tablet vertical */
+@media (max-width:980px){
+  .nav-enlaces{
+    position:fixed;inset:0 0 auto 0;background:var(--navy-3);
+    flex-direction:column;align-items:stretch;padding:96px 6% 30px;gap:8px;
+    transform:translateY(-100%);transition:transform .35s ease;z-index:-1;
+  }
+  body.menu-abierto .nav-enlaces{transform:none}
+  .nav-enlaces a{color:var(--blanco) !important;padding:14px;border-radius:12px}
+  .nav-enlaces a:hover{background:rgba(255,255,255,.08)}
+  .nav-cta{background:var(--azul);color:var(--blanco) !important;text-align:center}
+  .menu-boton{display:block}
+  .menu-boton span,.menu-boton span::before,.menu-boton span::after{background:var(--blanco) !important}
+  .dos-columnas{grid-template-columns:1fr;gap:40px}
+  .tarjeta-imagen img{height:420px}
+  .sec-cabecera{margin-bottom:36px}
+}
+
+/* Tablet pequeña / móvil grande */
+@media (max-width:860px){
+  .galeria-grilla{grid-template-columns:repeat(2,1fr)}
+  .foto img{height:300px}
+}
+
+/* Móvil */
+@media (max-width:640px){
+  section{padding:68px 0}
+  .hero-contenido{padding:140px 0 44px}
+  .hero h1{font-size:clamp(2.3rem,9vw,2.7rem)}
+  .hero-datos{grid-template-columns:repeat(2,1fr)}
+  .hero-datos div{padding:14px 18px}
+  .hero-datos div:nth-child(odd){border-left:none}
+  .hero-datos div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.18)}
+  .caracteristicas{grid-template-columns:1fr;margin-top:48px}
+  .galeria-grilla{grid-template-columns:1fr}
+  .foto img{height:280px}
+  .tarjeta-imagen img{height:320px}
+  .mapa-tarjeta{min-height:360px}
+  .cta-tarjeta{padding:52px 7%}
+  .pie-arriba{flex-direction:column}
+  .pie-contacto{width:100%;min-width:0}
+}
+
+/* Móvil muy pequeño */
+@media (max-width:400px){
+  .marca-texto{font-size:1.1rem}
+  .marca-icono{width:40px;height:40px}
+  .boton{padding:13px 22px;font-size:.9rem}
+  .hero-datos div{padding:12px 14px}
+  .hero-datos strong{font-size:1.15rem}
+}
+
+/* Accesibilidad: respetar reducción de movimiento */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important}
+}
+
+
+              </style>
+                        </head>
+                        <body>
+                            <!-- index.html — Mérida Campestre -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campestre — Mérida, Yucatán</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mérida Campestre — Terreno en venta sobre Avenida | Mérida, Yucatán</title>
+<meta name="description" content="Terreno con casa en venta sobre avenida en una de las colonias más antiguas y bonitas de Mérida. Ideal para comercio, edificio o locales comerciales.">
+<meta name="theme-color" content="#0e2740">
+
+<!-- Preconexiones para acelerar recursos externos -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://image.qwenlm.ai" crossorigin>
+
+<!-- Precarga de la imagen principal (LCP) -->
+<link rel="preload" as="image" href="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png">
+
+<!-- Solo dos tipografías: Cormorant Garamond (títulos, formal y delgada) + Libre Franklin (texto) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond/300.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/libre-franklin/300.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/libre-franklin/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/libre-franklin/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/libre-franklin/700.css">
+
+<!-- Hoja de estilos separada -->
+<link rel="stylesheet" href="styles.css">
+
+<!-- Script al final con defer para no bloquear el render -->
+<script src="script.js" defer></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg fixed-top navbar-main">
-        <div class="container">
-            <a class="brand" href="#inicio">Casa Campestre</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="menuNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="assets/pages/galeria.html    "></a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#ubicacion" ></a></li>
-                    <li class="nav-item"><a class="nav-link nav-link-custom" href="#contacto"  ></a></li>
-                </ul>
-                <div class="d-flex gap-2 mt-2 mt-lg-0 justify-content-center">
-                    <button class="lang-btn active" id="btn-es" onclick="cambiarIdioma('es')">ES</button>
-                    <button class="lang-btn" id="btn-en" onclick="cambiarIdioma('en')">EN</button>
-                </div>
-            </div>
-        </div>
+<!-- ============ HEADER ============ -->
+<header class="cabecera" id="cabecera">
+  <div class="wrap nav">
+    <a class="marca" href="#inicio">
+      <span class="marca-icono" aria-hidden="true">M</span>
+      <span class="marca-texto">méridacampestre<small>terreno · avenida · historia</small></span>
+    </a>
+    <nav class="nav-enlaces" id="navEnlaces" aria-label="Navegación principal">
+      <a href="#propiedad">Propiedad</a>
+      <a href="#galeria">Galería</a>
+      <a href="#plano">Plano</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto" class="nav-cta">Contactar</a>
     </nav>
+    <button class="menu-boton" id="menuBoton" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+  </div>
+</header>
 
-    <section id="inicio" class="hero">
-        <img class="hero-bg" src="assets/img/fachada/fachada2.png" alt="Casa">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-texto">
-                        <div class="hero-badge"><span class="punto"></span> <span data-i18n="badge">Disponible</span></div>
-                        <h1 class="hero-titulo"><span data-i18n="hero_1">Tu nuevo hogar en</span><br><span data-i18n="hero_2"><span>Mérida, Yucatán</span></span></h1>
-                        <p class="hero-sub" data-i18n="hero_sub">Casa con acabados de primera en una de las colonias más antiguas, céntricas y tranquilas de Mérida.</p>
-                        <div class="hero-precio">$18,000,000 <small>MXN</small></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero-fondo">
+    <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png"
+         alt="Casa colonial sobre avenida en Mérida, Yucatán"
+         width="1600" height="1000" fetchpriority="high" decoding="async">
+  </div>
+  <div class="hero-contenido">
+    <div class="wrap">
+      <div class="hero-etiqueta"><span class="punto" aria-hidden="true"></span> En venta · Disponible</div>
+      <h1>Terreno con casa sobre <em>Avenida</em> en el corazón de Mérida</h1>
+      <p class="hero-sub">
+        Propiedad única en una de las colonias más antiguas y bonitas de la ciudad.
+        Superficie estratégica con uso de suelo ideal para <strong>comercio, edificio o locales comerciales</strong>.
+      </p>
+      <div class="hero-datos">
+        <div><strong>15.00 m</strong><span>Frente</span></div>
+        <div><strong>42.00 m</strong><span>Fondo</span></div>
+        <div><strong>630 m²</strong><span>Superficie</span></div>
+        <div><strong>Comercial</strong><span>Uso de suelo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="mb-3" data-i18n="ventajas_titulo">¿Por qué esta casa?</h2>
-                <p class="text-muted" data-i18n="ventajas_sub">Ubicada estratégicamente en el corazón de Mérida</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><h3 data-i18n="v1_titulo">Zona Residencial Premium</h3><p data-i18n="v1_desc">Colonia tranquila, segura y con amplio sentido de comunidad.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h4"/><path d="M7 12h10"/></svg><h3 data-i18n="v2_titulo">Plazas Comerciales</h3><p data-i18n="v2_desc">Cerca de Galerías Mérida, La Isla y diversas plazas.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H6"/><path d="M22 12v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2"/><path d="M4 12v-8a2 2 0 0 1 2-2h4l2 3h10"/></svg><h3 data-i18n="v3_titulo">Hospitales y Clínicas</h3><p data-i18n="v3_desc">A minutos de Star Médica.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 10h5"/><path d="M7 16l4-4 4 4"/></svg><h3 data-i18n="v4_titulo">Cines y Entretenimiento</h3><p data-i18n="v4_desc">Cinépolis y Cinemex a pocos minutos.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><h3 data-i18n="v5_titulo">Servicios Completos</h3><p data-i18n="v5_desc">Supermercados, escuelas, bancos y farmacias cerca.</p></div></div>
-                <div class="col-md-4"><div class="pro-card"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3 data-i18n="v6_titulo">Inversión Segura</h3><p data-i18n="v6_desc">Mérida tiene la mayor plusvalía en México.</p></div></div>
-            </div>
-        </div>
-    </section>
+<!-- ============ PROPIEDAD ============ -->
+<section id="propiedad">
+  <div class="wrap">
+    <div class="dos-columnas">
+      <div class="col-texto">
+        <div class="kicker">La propiedad</div>
+        <h2 class="titulo-seccion">Una esquina con <em>historia</em>, un futuro con <em>plusvalía</em></h2>
+        <p>
+          Este terreno se ubica sobre <strong>avenida de alto flujo</strong> en una de las colonias
+          más antiguas y encantadoras de Mérida, rodeado de arquitectura colonial, cafés,
+          galerías y comercios consolidados.
+        </p>
+        <p>
+          Con <strong>15 metros de frente y 42 de fondo (630 m²)</strong>, su uso de suelo permite
+          desarrollar <strong>locales comerciales a pie de avenida</strong>, un <strong>edificio
+          residencial o mixto</strong>, o cualquier proyecto de comercio que aproveche la
+          visibilidad y el carácter único de la zona.
+        </p>
+        <p>
+          La casa existente conserva el encanto de la arquitectura yucateca: techos altos,
+          molduras originales y un patio interior que puede integrarse al nuevo proyecto.
+        </p>
+      </div>
+      <div class="col-imagen tarjeta-imagen">
+        <span class="sello">Sobre Avenida</span>
+        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png"
+             alt="Vista de la propiedad con jardín hacia la avenida"
+             width="1200" height="900" loading="lazy" decoding="async">
+      </div>
+    </div>
 
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-6"><img src="assets/img/fachada/fachada1.png" class="img-fluid rounded" alt="Colonia"></div>
-                <div class="col-lg-6">
-                    <h2 class="mb-3" data-i18n="colonia_titulo">Colonia Histórica y Céntrica</h2>
-                    <p class="text-muted" data-i18n="colonia_p1">Una de las colonias con más historia y tradición de Mérida. Barrio tranquilo, seguro y lleno de encanto.</p>
-                    <p class="text-muted mb-4" data-i18n="colonia_p2">A minutos del Centro Histórico, Paseo de Montejo y los mejores restaurantes.</p>
-                    <div class="row g-3">
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="colonia_c1">Centro Histórico</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">2 min</h5><small class="text-muted" data-i18n="colonia_c2">Paseo de Montejo</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="colonia_c3">Plazas</small></div></div>
-                        <div class="col-6"><div class="p-3 bg-white rounded border"><h5 class="mb-1" style="color:var(--azul)">25 min</h5><small class="text-muted" data-i18n="colonia_c4">Aeropuerto</small></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="caracteristicas">
+      <div class="tarjeta">
+        <div class="tarjeta-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+        <h3>Ideal para edificio</h3>
+        <p>Superficie y frente suficientes para desarrollo vertical residencial o mixto.</p>
+      </div>
+      <div class="tarjeta">
+        <div class="tarjeta-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5M4 9v11h16V9M9 20v-6h6v6M3 9h18"/></svg></div>
+        <h3>Locales comerciales</h3>
+        <p>15 m de frente sobre avenida: vitrina perfecta para marcas y franquicias.</p>
+      </div>
+      <div class="tarjeta">
+        <div class="tarjeta-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg></div>
+        <h3>Alto flujo vehicular</h3>
+        <p>Avenida consolidada con transporte público, servicios y comercios activos.</p>
+      </div>
+      <div class="tarjeta">
+        <div class="tarjeta-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Colonia histórica</h3>
+        <p>Una de las zonas más antiguas, bonitas y cotizadas de Mérida, con alma propia.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="galeria" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="mb-3" data-i18n="galeria_titulo">Galería de Fotos</h2>
-                <p class="text-muted" data-i18n="galeria_sub">Conoce cada rincón de la propiedad</p>
-            </div>
-            <div class="row g-3 mb-4">
-                <div class="col-6 col-md-3"><img src="assets/img/sala y recibidor/salaprincioal.png" class="galeria-img" alt="1"></div>
-                <div class="col-6 col-md-3"><img src="assets/img/comedor principal/comedorPrincipal1.png" class="galeria-img" alt="2"></div>
-                <div class="col-6 col-md-3"><img src="assets/img/cocina/cocina2.png" class="galeria-img" alt="3"></div>
-                <div class="col-6 col-md-3"><img src="assets/img/cuartoprincipal/cuartoPrincipal.jpeg" class="galeria-img" alt="4"></div>
-            </div>
-            <h3 class="text-center mb-4" data-i18n="galeria_carrusel_titulo"></h3>
-            <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="0" class="active"></button>
-                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="2"></button>
-                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="3"></button>
-                </div>
-                <div class="carousel-inner rounded">
-                    <div class="carousel-item active"><img src="assets/img/garage/GARAGE4.png" class="d-block w-100" alt="1"></div>
-                    <div class="carousel-item"><img src="assets/img/fachada/fachada1.png" class="d-block w-100" alt="2"></div>
-                    <div class="carousel-item"><img src="assets/img/alberca/piscina2.png" class="d-block w-100" alt="3"></div>
-                    <div class="carousel-item"><img src="assets/img/terraza exterior/terrazaexterior1.png" class="d-block w-100" alt="4"></div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
-            </div>
-        </div>
-    </section>
+<!-- ============ GALERÍA ============ -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-cabecera">
+      <div>
+        <div class="kicker">Galería</div>
+        <h2 class="titulo-seccion">Exteriores de la <em>casa</em></h2>
+      </div>
+      <p class="sec-nota">Haz clic en cualquier fotografía para ampliarla y apreciar el carácter colonial de la propiedad.</p>
+    </div>
+    <div class="galeria-grilla">
+      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png" data-cap="Fachada principal sobre avenida — arquitectura colonial">
+        <span class="foto-num">01</span>
+        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png" alt="Fachada colonial principal sobre avenida" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>Fachada principal sobre avenida</figcaption>
+      </figure>
+      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c459e0b3-4fef-48b0-9c5b-7f25b9788176.png" data-cap="Detalle de muros originales y ventanales de época">
+        <span class="foto-num">02</span>
+        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c459e0b3-4fef-48b0-9c5b-7f25b9788176.png" alt="Detalle de fachada con bugambilias" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>Muros y ventanales de época</figcaption>
+      </figure>
+      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png" data-cap="Jardín frontal y palmeras hacia la avenida">
+        <span class="foto-num">03</span>
+        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png" alt="Jardín frontal de la propiedad" width="1200" height="900" loading="lazy" decoding="async">
+        <figcaption>Jardín frontal hacia la avenida</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
 
-    <section id="ubicacion" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="mb-3" data-i18n="ubicacion_titulo">Ubicación Privilegiada</h2>
-                <p class="text-muted" data-i18n="ubicacion_sub">En el corazón de Mérida</p>
-            </div>
-            <div class="row g-4 mb-5">
-                <div class="col-md-6"><div class="pro-card h-100"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><h3 data-i18n="ubi_colonia_titulo">Colonia Céntrica e Histórica</h3><p data-i18n="ubi_colonia_desc">Una de las colonias más antiguas y tranquilas de Mérida con calles arboladas.</p></div></div>
-                <div class="col-md-6"><div class="pro-card h-100"><svg class="pro-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><h3 data-i18n="ubi_conexion_titulo">Excelente Conectividad</h3><p data-i18n="ubi_conexion_desc">Fácil acceso a las principales avenidas. 20 min del aeropuerto.</p></div></div>
-            </div>
-            <div class="row g-3">
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">10 min</h5><small class="text-muted" data-i18n="ubi_c1">Centro Histórico</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">2 min</h5><small class="text-muted" data-i18n="ubi_c2">Paseo de Montejo</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">5 min</h5><small class="text-muted" data-i18n="ubi_c3">Plazas</small></div></div>
-                <div class="col-6 col-md-3"><div class="p-3 bg-white rounded border text-center"><h5 style="color:var(--azul)">25 min</h5><small class="text-muted" data-i18n="ubi_c4">Aeropuerto</small></div></div>
-            </div>
-        </div>
-    </section>
+<!-- Visor de imágenes (lightbox) -->
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
+  <button class="visor-cerrar" id="visorCerrar" aria-label="Cerrar">✕</button>
+  <div class="visor-caja">
+    <img id="visorImg" src="" alt="Fotografía ampliada">
+    <p id="visorCap"></p>
+  </div>
+</div>
 
-    <section id="contacto" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="mb-3" data-i18n="contacto_titulo">Contáctanos</h2>
-                <p class="text-muted" data-i18n="contacto_sub">Agenda una visita</p>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="pro-card text-center px-4 py-4">
-                        <h4 class="mb-4" data-i18n="contacto_info_titulo">Información de Contacto</h4>
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-6 col-lg-4"><div class="contacto-icono mx-auto mb-2" style="display:flex;">&#x1F4DE;</div><span class="contacto-etiqueta" data-i18n="contacto_tel">Teléfono</span><div class="contacto-dato">+52 999 123 4567</div></div>
-                            <div class="col-md-6 col-lg-4"><div class="contacto-icono mx-auto mb-2" style="display:flex;">&#x1F4F1;</div><span class="contacto-etiqueta">WhatsApp</span><div class="contacto-dato">+52 999 987 6543</div></div>
-                            <div class="col-md-6 col-lg-4"><div class="contacto-icono mx-auto mb-2" style="display:flex;">&#x2709;</div><span class="contacto-etiqueta" data-i18n="contacto_email">Correo</span><div class="contacto-dato">ventas@casamerida.mx</div></div>
-                            <div class="col-md-6 col-lg-4"><div class="contacto-icono mx-auto mb-2" style="display:flex;">&#x1F4CD;</div><span class="contacto-etiqueta" data-i18n="contacto_dir">Dirección</span><div class="contacto-dato" data-i18n="contacto_dir_val">Mérida, Yucatán, México</div></div>
-                            <div class="col-md-6 col-lg-4"><div class="contacto-icono mx-auto mb-2" style="display:flex;">&#x1F552;</div><span class="contacto-etiqueta" data-i18n="contacto_horario">Horario</span><div class="contacto-dato" data-i18n="contacto_horario_val">Lun-Vie 9:00-19:00 · Sáb 10:00-15:00</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ PLANO ============ -->
+<section id="plano">
+  <div class="wrap">
+    <div class="sec-cabecera">
+      <div>
+        <div class="kicker">Plano del terreno</div>
+        <h2 class="titulo-seccion">Dimensiones que dan para <em>todo</em></h2>
+      </div>
+    </div>
+    <div class="dos-columnas">
+      <div class="plano-tarjeta">
+        <span class="esquina tl" aria-hidden="true"></span>
+        <span class="esquina tr" aria-hidden="true"></span>
+        <span class="esquina bl" aria-hidden="true"></span>
+        <span class="esquina br" aria-hidden="true"></span>
+        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/103539130-c8f0-4dc4-8480-cf32ae47e252.png"
+             alt="Plano del terreno: frente 15 m, fondo 42 m, casa, patio, banqueta y avenida"
+             width="1200" height="900" loading="lazy" decoding="async">
+      </div>
+      <div>
+        <p class="texto-suave">
+          El lote cuenta con una geometría rectangular perfecta para proyectar: frente amplio
+          hacia avenida para el área comercial y un fondo profundo para desarrollo habitacional
+          u oficinas, conservando el patio como área verde o terraza.
+        </p>
+        <table class="tabla">
+          <tr><td>Frente</td><td>15.00 m</td></tr>
+          <tr><td>Fondo</td><td>42.00 m</td></tr>
+          <tr><td>Superficie total</td><td>630.00 m²</td></tr>
+          <tr><td>Casa existente</td><td>Conservable / remodelable</td></tr>
+          <tr><td>Patio trasero</td><td>Aprovechable como terraza o área verde</td></tr>
+          <tr class="fila-azul"><td>Uso de suelo</td><td>Comercial · Mixto (H4)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer class="footer">
-        <div class="container text-center">
-            <h5 style="font-family:'Playfair Display',serif; font-size:20px; color:#fff; margin-bottom:10px;">Casa <span style="color:var(--dorado)">Mérida</span></h5>
-            <p class="mb-3" style="font-size:13px;" data-i18n="footer_desc">Casa en venta en una de las colonias más antiguas y tranquilas de Mérida.</p>
-            <div style="padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); font-size:12px; color:rgba(255,255,255,0.35);" data-i18n="footer_copy">© 2026 Casa Mérida. Todos los derechos reservados.</div>
-        </div>
-    </footer>
+<!-- ============ UBICACIÓN ============ -->
+<section id="ubicacion">
+  <div class="wrap">
+    <div class="sec-cabecera">
+      <div>
+        <div class="kicker">Ubicación</div>
+        <h2 class="titulo-seccion">En una de las colonias más <em>antiguas y bonitas</em> de Mérida</h2>
+      </div>
+    </div>
+    <div class="dos-columnas ub">
+      <div class="col-texto">
+        <p>
+          La propiedad se encuentra sobre avenida principal, a minutos del Centro Histórico,
+          en una colonia de arquitectura centenaria, parques arbolados, cafés de autor y
+          vida cultural activa.
+        </p>
+        <p>Explora el mapa y traza tu ruta directamente desde la página:</p>
+        <ul class="lista-check">
+          <li><span class="check" aria-hidden="true">✓</span> A pocos minutos del Centro Histórico y Paseo de Montejo</li>
+          <li><span class="check" aria-hidden="true">✓</span> Rodeada de comercios, restaurantes y servicios consolidados</li>
+          <li><span class="check" aria-hidden="true">✓</span> Transporte público y conectividad a toda la ciudad</li>
+          <li><span class="check" aria-hidden="true">✓</span> Zona de alta demanda y plusvalía comprobada</li>
+        </ul>
+      </div>
+      <div class="mapa-tarjeta">
+        <iframe
+          src="https://www.google.com/maps?q=Centro%20Hist%C3%B3rico%2C%20M%C3%A9rida%2C%20Yucat%C3%A1n%2C%20M%C3%A9xico&z=14&output=embed"
+          title="Mapa de ubicación del terreno en Mérida, Yucatán"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        var traducciones = {
-            es: {
-                nav_galeria: "Galería", nav_ubicacion: "Ubicación", nav_contacto: "Contacto",
-                badge: "Disponible", hero_1: "Tu nuevo hogar en", hero_2: "<span>Mérida, Yucatán</span>",
-                hero_sub: "Casa con acabados de primera en una de las colonias más antiguas, céntricas y tranquilas de Mérida.",
-                ventajas_titulo: "¿Por qué esta casa?", ventajas_sub: "Ubicada estratégicamente en el corazón de Mérida",
-                v1_titulo: "Zona Residencial Premium", v1_desc: "Colonia tranquila, segura y con amplio sentido de comunidad.",
-                v2_titulo: "Plazas Comerciales", v2_desc: "Cerca de Galerías Mérida, La Isla y diversas plazas.",
-                v3_titulo: "Hospitales y Clínicas", v3_desc: "A minutos de Star Médica y Christus Muguerza.",
-                v4_titulo: "Cines y Entretenimiento", v4_desc: "Cinépolis y Cinemex a pocos minutos.",
-                v5_titulo: "Servicios Completos", v5_desc: "Supermercados, escuelas, bancos y farmacias cerca.",
-                v6_titulo: "Inversión Segura", v6_desc: "Mérida tiene la mayor plusvalía en México.",
-                colonia_titulo: "Colonia Histórica y Céntrica",
-                colonia_p1: "Una de las colonias con más historia y tradición de Mérida. Barrio tranquilo, seguro y lleno de encanto.",
-                colonia_p2: "A minutos del Centro Histórico, Paseo de Montejo y los mejores restaurantes.",
-                colonia_c1: "Centro Histórico", colonia_c2: "Paseo de Montejo", colonia_c3: "Plazas", colonia_c4: "Aeropuerto",
-                galeria_titulo: "Galería de Fotos", galeria_sub: "Conoce cada rincón de la propiedad",
-                galeria_carrusel_titulo: "Tour Virtual",
-                ubicacion_titulo: "Ubicación Privilegiada", ubicacion_sub: "En el corazón de Mérida",
-                ubi_colonia_titulo: "Colonia Céntrica e Histórica", ubi_colonia_desc: "Una de las colonias más antiguas y tranquilas de Mérida con calles arboladas.",
-                ubi_conexion_titulo: "Excelente Conectividad", ubi_conexion_desc: "Fácil acceso a las principales avenidas. 20 min del aeropuerto.",
-                ubi_c1: "Centro Histórico", ubi_c2: "Paseo de Montejo", ubi_c3: "Plazas", ubi_c4: "Aeropuerto",
-                contacto_titulo: "Contáctanos", contacto_sub: "Agenda una visita",
-                contacto_info_titulo: "Información de Contacto",
-                contacto_tel: "Teléfono", contacto_email: "Correo", contacto_dir: "Dirección",
-                contacto_dir_val: "Mérida, Yucatán, México", contacto_horario: "Horario",
-                contacto_horario_val: "Lun-Vie 9:00-19:00 · Sáb 10:00-15:00",
-                footer_desc: "Casa en venta en una de las colonias más antiguas y tranquilas de Mérida.",
-                footer_copy: "© 2026 Casa Mérida. Todos los derechos reservados."
-            },
-            en: {
-                nav_galeria: "Gallery", nav_ubicacion: "Location", nav_contacto: "Contact",
-                badge: "Available", hero_1: "Your new home in", hero_2: "<span>Mérida, Yucatán</span>",
-                hero_sub: "First-class finishes home in one of Mérida's oldest, most central and quiet neighborhoods.",
-                ventajas_titulo: "Why this house?", ventajas_sub: "Strategically located in the heart of Mérida",
-                v1_titulo: "Premium Residential Area", v1_desc: "Quiet, safe neighborhood with a strong sense of community.",
-                v2_titulo: "Shopping Centers", v2_desc: "Close to Galerías Mérida, La Isla and various plazas.",
-                v3_titulo: "Hospitals & Clinics", v3_desc: "Minutes from Star Médica and Christus Muguerza.",
-                v4_titulo: "Cinemas & Entertainment", v4_desc: "Cinépolis and Cinemark just minutes away.",
-                v5_titulo: "Complete Services", v5_desc: "Supermarkets, schools, banks and pharmacies nearby.",
-                v6_titulo: "Secure Investment", v6_desc: "Mérida has the highest appreciation in Mexico.",
-                colonia_titulo: "Historic & Central Neighborhood",
-                colonia_p1: "One of the most historic neighborhoods in Mérida. Quiet, safe and full of charm.",
-                colonia_p2: "Minutes from the Historic Center, Paseo de Montejo and the best restaurants.",
-                colonia_c1: "Historic Center", colonia_c2: "Paseo de Montejo", colonia_c3: "Plazas", colonia_c4: "Airport",
-                galeria_titulo: "Photo Gallery", galeria_sub: "Explore every corner of the property",
-                galeria_carrusel_titulo: "Virtual Tour",
-                ubicacion_titulo: "Prime Location", ubicacion_sub: "In the heart of Mérida",
-                ubi_colonia_titulo: "Central & Historic Neighborhood", ubi_colonia_desc: "One of Mérida's oldest and quietest neighborhoods with tree-lined streets.",
-                ubi_conexion_titulo: "Excellent Connectivity", ubi_conexion_desc: "Easy access to main avenues. 20 min from the airport.",
-                ubi_c1: "Historic Center", ubi_c2: "Paseo de Montejo", ubi_c3: "Plazas", ubi_c4: "Airport",
-                contacto_titulo: "Contact Us", contacto_sub: "Schedule a visit",
-                contacto_info_titulo: "Contact Information",
-                contacto_tel: "Phone", contacto_email: "Email", contacto_dir: "Address",
-                contacto_dir_val: "Mérida, Yucatán, Mexico", contacto_horario: "Hours",
-                contacto_horario_val: "Mon-Fri 9:00-19:00 · Sat 10:00-15:00",
-                footer_desc: "House for sale in one of Mérida's oldest and quietest neighborhoods.",
-                footer_copy: "© 2026 Casa Mérida. All rights reserved."
-            }
-        };
+<!-- ============ CTA / CONTACTO ============ -->
+<section class="banda-cta" id="contacto">
+  <div class="wrap">
+    <div class="cta-tarjeta">
+      <h2>¿Listo para desarrollar tu próximo proyecto en Mérida?</h2>
+      <p>Agenda una visita al terreno o solicita información de precios, medidas y uso de suelo. Respondemos el mismo día.</p>
+      <div class="cta-botones">
+        <a class="boton boton-whats" href="https://wa.me/529991234567?text=Hola%2C%20me%20interesa%20el%20terreno%20en%20venta%20sobre%20avenida%20en%20M%C3%A9rida" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.3-.3.5l-.5.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.6.8 1.9.9.3.2.5.2.5.4.1.1.1.6-.1 1.1Z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <a class="boton boton-blanco" href="tel:+529991234567">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></svg>
+          Llamar ahora
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function cambiarIdioma(idioma) {
-            document.getElementById('btn-es').classList.toggle('active', idioma === 'es');
-            document.getElementById('btn-en').classList.toggle('active', idioma === 'en');
-            document.documentElement.lang = idioma;
-            document.querySelectorAll('[data-i18n]').forEach(function(el) {
-                var k = el.getAttribute('data-i18n');
-                if (traducciones[idioma][k]) el.innerHTML = traducciones[idioma][k];
-            });
-            document.title = idioma === 'en' ? 'Casa Mérida — House for Sale' : 'Casa Mérida — Propiedad en Venta';
-        }
+<!-- ============ FOOTER ============ -->
+<footer class="pie">
+  <div class="wrap">
+    <div class="pie-arriba">
+      <div class="pie-marca">
+        <a class="marca" href="#inicio">
+          <span class="marca-icono" aria-hidden="true">M</span>
+          <span class="marca-texto">méridacampestre<small>terreno · avenida · historia</small></span>
+        </a>
+        <p>Terreno con casa en venta sobre avenida, en una de las colonias más antiguas y bonitas de Mérida, Yucatán. Ideal para comercio, edificio o locales comerciales.</p>
+      </div>
+      <div class="pie-contacto">
+        <span class="pie-etiqueta">Contacto</span>
+        <p class="pie-datos">
+          <a href="tel:+529991234567">+52 999 123 4567</a>
+          <a href="mailto:ventas@meridacampestre.mx">ventas@meridacampestre.mx</a>
+        </p>
+      </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anio"></span> méridacampestre · Mérida, Yucatán, México</span>
+      <span>Terreno en venta · Uso de suelo comercial / mixto</span>
+    </div>
+  </div>
+</footer>
 
-        // Cierra el menú móvil al hacer clic en cualquier enlace
-        document.querySelectorAll('.navbar-nav .nav-link').forEach(function(link) {
-            link.addEventListener('click', function() {
-                var menu = document.getElementById('menuNav');
-                var bsCollapse = bootstrap.Collapse.getInstance(menu);
-                if (bsCollapse) bsCollapse.hide();
-            });
-        });
-    </script>
 </body>
 </html>
 
+
+              <script>
+                              /* =========================================================
+   script.js — méridacampestre
+   JavaScript mínimo: header, menú móvil, visor y año.
+   Sin librerías externas → carga instantánea.
+   ========================================================= */
+(function () {
+  'use strict';
+
+  /* ----- Header sólido al hacer scroll ----- */
+  var cabecera = document.getElementById('cabecera');
+  function actualizarCabecera() {
+    if (window.scrollY > 40) {
+      cabecera.classList.add('fija');
+    } else {
+      cabecera.classList.remove('fija');
+    }
+  }
+  window.addEventListener('scroll', actualizarCabecera, { passive: true });
+  actualizarCabecera();
+
+  /* ----- Menú móvil ----- */
+  var botonMenu = document.getElementById('menuBoton');
+  var cuerpo = document.body;
+
+  botonMenu.addEventListener('click', function () {
+    var abierto = cuerpo.classList.toggle('menu-abierto');
+    botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+  });
+
+  var enlacesNav = document.querySelectorAll('.nav-enlaces a');
+  enlacesNav.forEach(function (enlace) {
+    enlace.addEventListener('click', function () {
+      cuerpo.classList.remove('menu-abierto');
+      botonMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ----- Visor de galería (lightbox) ----- */
+  var visor = document.getElementById('visor');
+  var visorImg = document.getElementById('visorImg');
+  var visorCap = document.getElementById('visorCap');
+  var visorCerrar = document.getElementById('visorCerrar');
+
+  document.querySelectorAll('.foto').forEach(function (figura) {
+    figura.addEventListener('click', function () {
+      visorImg.src = figura.getAttribute('data-full');
+      visorImg.alt = figura.getAttribute('data-cap');
+      visorCap.textContent = figura.getAttribute('data-cap');
+      visor.classList.add('abierto');
+      cuerpo.style.overflow = 'hidden';
+    });
+  });
+
+  function cerrarVisor() {
+    visor.classList.remove('abierto');
+    cuerpo.style.overflow = '';
+    visorImg.src = '';
+  }
+
+  visorCerrar.addEventListener('click', cerrarVisor);
+  visor.addEventListener('click', function (evento) {
+    if (evento.target === visor) { cerrarVisor(); }
+  });
+  document.addEventListener('keydown', function (evento) {
+    if (evento.key === 'Escape' && visor.classList.contains('abierto')) {
+      cerrarVisor();
+    }
+  });
+
+  /* ----- Año dinámico en el footer ----- */
+  document.getElementById('anio').textContent = new Date().getFullYear();
+})();
+
+
+              </script>
+                        </body>
+                        </html>
+                    
