@@ -4,388 +4,6 @@
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                /* =========================================================
-   styles.css — méridacampestre
-   Minimalista: azul marino, blanco y detalles azules.
-   Tipografías: Cormorant Garamond (títulos formales, delgados)
-   + Libre Franklin (texto). Sin animaciones continuas.
-   ========================================================= */
-
-:root{
-  --blanco:#ffffff;
-  --hielo:#f5f8fb;
-  --niebla:#e4ecf4;
-  --navy:#0e2740;
-  --navy-2:#14365a;
-  --navy-3:#0a1c30;
-  --azul:#2b5f94;
-  --tinta:#132538;
-  --suave:#52677d;
-  --whats:#1ebe5d;
-  --whats-osc:#17a34f;
-  --linea:rgba(14,39,64,.13);
-  --radio:16px;
-  --sombra:0 20px 50px -22px rgba(14,39,64,.28);
-  --fuente-titulo:'Cormorant Garamond',Georgia,serif;
-  --fuente-texto:'Libre Franklin',system-ui,sans-serif;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--fuente-texto);
-  background:var(--blanco);
-  color:var(--tinta);
-  line-height:1.6;
-  overflow-x:hidden;
-}
-h1,h2,h3{font-family:var(--fuente-titulo);font-weight:500}
-img{display:block;max-width:100%}
-a{text-decoration:none;color:inherit}
-.wrap{width:min(1180px,92%);margin:0 auto}
-
-/* ---------- BOTONES ---------- */
-.boton{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:14px 26px;border-radius:999px;border:none;cursor:pointer;
-  font-family:var(--fuente-texto);font-weight:600;font-size:.95rem;letter-spacing:.02em;
-  transition:background-color .2s ease, transform .2s ease;
-}
-.boton:hover{transform:translateY(-2px)}
-.boton svg{width:20px;height:20px}
-.boton-whats{background:var(--whats);color:var(--blanco);box-shadow:0 14px 30px -12px rgba(0,0,0,.35)}
-.boton-whats:hover{background:var(--whats-osc)}
-.boton-blanco{background:var(--blanco);color:var(--navy)}
-.boton-blanco:hover{background:var(--hielo)}
-
-/* ---------- HEADER ---------- */
-.cabecera{
-  position:fixed;inset:0 0 auto 0;z-index:60;
-  padding:18px 0;
-  transition:background-color .3s ease, box-shadow .3s ease, padding .3s ease;
-}
-.cabecera.fija{
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 30px -18px rgba(14,39,64,.3);
-  padding:10px 0;
-}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.marca{display:flex;align-items:center;gap:12px}
-.marca-icono{
-  width:44px;height:44px;border-radius:10px;flex:none;
-  background:var(--navy);color:var(--blanco);
-  display:grid;place-items:center;
-  font-family:var(--fuente-titulo);font-weight:600;font-size:22px;
-}
-.marca-texto{
-  font-family:var(--fuente-titulo);font-weight:600;font-size:1.25rem;letter-spacing:.03em;
-  color:var(--blanco);transition:color .3s;line-height:1.1;
-}
-.marca-texto small{
-  display:block;font-family:var(--fuente-texto);font-weight:600;
-  font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;opacity:.7;
-}
-.cabecera.fija .marca-texto{color:var(--navy)}
-.nav-enlaces{display:flex;gap:6px;align-items:center}
-.nav-enlaces a{
-  font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--blanco);padding:8px 14px;border-radius:999px;
-  transition:background-color .2s ease;
-}
-.nav-enlaces a:hover{background:rgba(255,255,255,.16)}
-.cabecera.fija .nav-enlaces a{color:var(--navy)}
-.cabecera.fija .nav-enlaces a:hover{background:rgba(14,39,64,.08)}
-.nav-cta{background:var(--azul);color:var(--blanco) !important;padding:10px 20px !important}
-.nav-cta:hover{background:var(--navy-2)}
-.menu-boton{
-  display:none;background:none;border:none;cursor:pointer;
-  width:44px;height:44px;position:relative;
-}
-.menu-boton span,
-.menu-boton span::before,
-.menu-boton span::after{
-  content:"";display:block;width:24px;height:2px;background:var(--blanco);
-  position:absolute;left:10px;border-radius:2px;transition:background-color .3s;
-}
-.menu-boton span{top:21px}
-.menu-boton span::before{top:-7px;left:0}
-.menu-boton span::after{top:7px;left:0}
-.cabecera.fija .menu-boton span,
-.cabecera.fija .menu-boton span::before,
-.cabecera.fija .menu-boton span::after{background:var(--navy)}
-
-/* ---------- HERO ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--blanco);overflow:hidden;background:var(--navy)}
-.hero-fondo{position:absolute;inset:0}
-.hero-fondo img{width:100%;height:100%;object-fit:cover}
-.hero-fondo::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(10,28,48,.6) 0%,rgba(10,28,48,.15) 42%,rgba(10,28,48,.88) 100%);
-}
-.hero-contenido{position:relative;z-index:2;padding:170px 0 64px;width:100%}
-.hero-etiqueta{
-  display:inline-flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.1);backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,.3);
-  padding:8px 18px;border-radius:999px;
-  font-size:.74rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
-  margin-bottom:22px;
-}
-.punto{width:8px;height:8px;border-radius:50%;background:#4ade80;flex:none}
-.hero h1{
-  font-size:clamp(2.6rem,6vw,4.9rem);
-  font-weight:400;line-height:1.08;letter-spacing:0;
-  max-width:16ch;
-}
-.hero h1 em{font-style:italic;font-weight:500}
-.hero-sub{max-width:58ch;margin-top:18px;font-size:clamp(1rem,1.4vw,1.14rem);font-weight:300;color:rgba(255,255,255,.88)}
-.hero-sub strong{font-weight:600;color:var(--blanco)}
-.hero-datos{
-  margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);
-  background:rgba(255,255,255,.08);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.24);border-radius:var(--radio);
-  overflow:hidden;
-}
-.hero-datos div{padding:18px 22px;border-left:1px solid rgba(255,255,255,.18)}
-.hero-datos div:first-child{border-left:none}
-.hero-datos strong{display:block;font-family:var(--fuente-titulo);font-size:clamp(1.3rem,2.3vw,1.8rem);font-weight:500;color:var(--blanco);line-height:1.1}
-.hero-datos span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.75)}
-
-/* ---------- SECCIONES ---------- */
-section{padding:96px 0}
-.sec-cabecera{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;flex-wrap:wrap}
-.sec-nota{max-width:38ch;color:var(--suave);font-weight:300}
-.kicker{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:.72rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--azul);margin-bottom:14px;
-}
-.kicker::before{content:"";width:34px;height:2px;background:var(--azul)}
-.titulo-seccion{font-size:clamp(2.1rem,4.2vw,3.2rem);font-weight:500;line-height:1.12}
-.titulo-seccion em{font-style:italic;color:var(--azul)}
-.texto-suave{color:var(--suave);font-weight:300;font-size:1.04rem}
-
-/* ---------- DOS COLUMNAS ---------- */
-.dos-columnas{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
-.col-texto p{color:var(--suave);margin-bottom:16px;font-size:1.02rem;font-weight:300}
-.col-texto p strong{color:var(--tinta);font-weight:600}
-.dos-columnas .col-texto .titulo-seccion{margin-bottom:22px}
-
-/* ---------- TARJETA IMAGEN ---------- */
-.tarjeta-imagen{position:relative;border-radius:var(--radio);overflow:hidden;box-shadow:var(--sombra)}
-.tarjeta-imagen img{width:100%;height:520px;object-fit:cover}
-.sello{
-  position:absolute;top:20px;left:20px;
-  background:var(--azul);color:var(--blanco);
-  font-weight:600;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
-  padding:9px 18px;border-radius:999px;box-shadow:0 10px 24px -10px rgba(0,0,0,.35);
-}
-
-/* ---------- CARACTERÍSTICAS (solo azul) ---------- */
-.caracteristicas{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:70px}
-.tarjeta{
-  background:var(--hielo);border:1px solid var(--linea);border-radius:var(--radio);
-  padding:30px 26px;position:relative;overflow:hidden;
-  transition:transform .25s ease, box-shadow .25s ease;
-}
-.tarjeta::before{
-  content:"";position:absolute;inset:0 0 auto 0;height:3px;
-  background:var(--azul);
-}
-.tarjeta:hover{transform:translateY(-6px);box-shadow:var(--sombra)}
-.tarjeta-icono{
-  width:52px;height:52px;border-radius:12px;background:var(--blanco);
-  border:1px solid var(--linea);
-  display:grid;place-items:center;margin-bottom:18px;color:var(--azul);
-}
-.tarjeta-icono svg{width:26px;height:26px}
-.tarjeta h3{font-size:1.35rem;font-weight:600;margin-bottom:8px;color:var(--navy)}
-.tarjeta p{font-size:.92rem;color:var(--suave);font-weight:300}
-
-/* ---------- GALERÍA ---------- */
-#galeria{background:var(--hielo)}
-.galeria-grilla{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.foto{
-  position:relative;border-radius:var(--radio);overflow:hidden;cursor:zoom-in;
-  box-shadow:0 14px 40px -20px rgba(14,39,64,.3);background:var(--niebla);
-}
-.foto img{width:100%;height:340px;object-fit:cover;transition:transform .4s ease}
-.foto:hover img{transform:scale(1.05)}
-.foto figcaption{
-  position:absolute;inset:auto 0 0 0;padding:44px 22px 18px;
-  background:linear-gradient(180deg,transparent,rgba(10,28,48,.88));
-  color:var(--blanco);font-weight:600;font-size:.9rem;letter-spacing:.04em;
-}
-.foto-num{
-  position:absolute;top:16px;left:16px;
-  font-family:var(--fuente-titulo);font-weight:600;font-size:.95rem;
-  background:var(--blanco);color:var(--navy);width:38px;height:38px;border-radius:50%;
-  display:grid;place-items:center;
-}
-
-/* ---------- VISOR (LIGHTBOX) ---------- */
-.visor{
-  position:fixed;inset:0;z-index:100;background:rgba(10,22,36,.94);
-  display:grid;place-items:center;padding:5vh 4vw;
-  opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s;
-}
-.visor.abierto{opacity:1;visibility:visible}
-.visor-caja img{max-width:min(960px,92vw);max-height:76vh;border-radius:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
-.visor-caja p{color:var(--hielo);text-align:center;margin-top:16px;font-weight:500;letter-spacing:.05em}
-.visor-cerrar{
-  position:absolute;top:22px;right:26px;width:52px;height:52px;border-radius:50%;
-  background:var(--blanco);border:none;cursor:pointer;font-size:1.3rem;font-weight:700;color:var(--navy);
-  transition:transform .25s ease;
-}
-.visor-cerrar:hover{transform:rotate(90deg)}
-
-/* ---------- PLANO ---------- */
-.plano-tarjeta{
-  background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);
-  padding:26px;box-shadow:var(--sombra);position:relative;
-}
-.plano-tarjeta img{width:100%;border-radius:10px;border:1px solid var(--linea)}
-.esquina{position:absolute;width:26px;height:26px;border:3px solid var(--azul)}
-.esquina.tl{top:-8px;left:-8px;border-right:none;border-bottom:none;border-radius:8px 0 0 0}
-.esquina.tr{top:-8px;right:-8px;border-left:none;border-bottom:none;border-radius:0 8px 0 0}
-.esquina.bl{bottom:-8px;left:-8px;border-right:none;border-top:none;border-radius:0 0 0 8px}
-.esquina.br{bottom:-8px;right:-8px;border-left:none;border-top:none;border-radius:0 0 8px 0}
-.tabla{width:100%;border-collapse:collapse;margin:26px 0 0}
-.tabla tr{border-bottom:1px solid var(--linea)}
-.tabla td{padding:13px 4px;font-size:.97rem}
-.tabla td:first-child{font-weight:600;color:var(--navy)}
-.tabla td:last-child{text-align:right;color:var(--suave);font-weight:300}
-.tabla .fila-azul td{color:var(--azul);font-weight:700}
-
-/* ---------- UBICACIÓN ---------- */
-#ubicacion{background:var(--navy);color:var(--hielo)}
-#ubicacion .kicker{color:rgba(255,255,255,.7)}
-#ubicacion .kicker::before{background:rgba(255,255,255,.7)}
-#ubicacion .titulo-seccion em{color:var(--blanco)}
-.dos-columnas.ub{align-items:stretch}
-#ubicacion .col-texto p{color:rgba(245,248,251,.85)}
-.lista-check{list-style:none;margin-top:26px;display:grid;gap:14px}
-.lista-check li{display:flex;gap:14px;align-items:flex-start;font-weight:500}
-.check{
-  flex:none;width:26px;height:26px;border-radius:50%;
-  background:var(--azul);color:var(--blanco);
-  display:grid;place-items:center;font-weight:700;font-size:.8rem;margin-top:2px;
-}
-.mapa-tarjeta{
-  border-radius:var(--radio);overflow:hidden;
-  border:3px solid var(--azul);
-  box-shadow:0 30px 70px -30px rgba(0,0,0,.55);
-  min-height:440px;position:relative;background:var(--blanco);
-}
-.mapa-tarjeta iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-
-/* ---------- BANDA CTA ---------- */
-.banda-cta{background:var(--blanco);text-align:center}
-.cta-tarjeta{
-  background:linear-gradient(135deg,var(--navy-2),var(--navy-3));
-  border-radius:24px;padding:66px 8%;color:var(--blanco);
-  position:relative;overflow:hidden;
-  box-shadow:0 30px 70px -28px rgba(14,39,64,.65);
-}
-.cta-tarjeta h2{font-size:clamp(2rem,3.8vw,2.9rem);font-weight:500;line-height:1.15;max-width:22ch;margin:0 auto 14px}
-.cta-tarjeta p{font-weight:300;opacity:.9;max-width:52ch;margin:0 auto 32px}
-.cta-botones{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
-
-/* ---------- FOOTER ---------- */
-.pie{background:var(--navy-3);color:var(--hielo);padding:64px 0 32px}
-.pie-arriba{
-  display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
-  align-items:flex-start;padding-bottom:40px;
-  border-bottom:1px solid rgba(255,255,255,.12);
-}
-.pie-marca{max-width:420px}
-.pie-marca p{color:rgba(245,248,251,.6);font-weight:300;margin-top:16px;font-size:.94rem}
-.pie-contacto{display:flex;flex-direction:column;gap:10px;min-width:260px;padding-top:8px}
-.pie-etiqueta{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,248,251,.55);font-weight:700}
-.pie-datos{display:grid;gap:6px;font-size:1rem;font-weight:400}
-.pie-datos a{color:rgba(245,248,251,.85);transition:color .2s ease}
-.pie-datos a:hover{color:var(--blanco)}
-.pie-abajo{
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  padding-top:26px;font-size:.82rem;color:rgba(245,248,251,.5);font-weight:300;
-}
-
-/* =========================================================
-   RESPONSIVE — todos los dispositivos
-   ========================================================= */
-
-/* Tablet horizontal / laptops pequeñas */
-@media (max-width:1100px){
-  .caracteristicas{grid-template-columns:repeat(2,1fr)}
-  .dos-columnas{gap:44px}
-}
-
-/* Tablet vertical */
-@media (max-width:980px){
-  .nav-enlaces{
-    position:fixed;inset:0 0 auto 0;background:var(--navy-3);
-    flex-direction:column;align-items:stretch;padding:96px 6% 30px;gap:8px;
-    transform:translateY(-100%);transition:transform .35s ease;z-index:-1;
-  }
-  body.menu-abierto .nav-enlaces{transform:none}
-  .nav-enlaces a{color:var(--blanco) !important;padding:14px;border-radius:12px}
-  .nav-enlaces a:hover{background:rgba(255,255,255,.08)}
-  .nav-cta{background:var(--azul);color:var(--blanco) !important;text-align:center}
-  .menu-boton{display:block}
-  .menu-boton span,.menu-boton span::before,.menu-boton span::after{background:var(--blanco) !important}
-  .dos-columnas{grid-template-columns:1fr;gap:40px}
-  .tarjeta-imagen img{height:420px}
-  .sec-cabecera{margin-bottom:36px}
-}
-
-/* Tablet pequeña / móvil grande */
-@media (max-width:860px){
-  .galeria-grilla{grid-template-columns:repeat(2,1fr)}
-  .foto img{height:300px}
-}
-
-/* Móvil */
-@media (max-width:640px){
-  section{padding:68px 0}
-  .hero-contenido{padding:140px 0 44px}
-  .hero h1{font-size:clamp(2.3rem,9vw,2.7rem)}
-  .hero-datos{grid-template-columns:repeat(2,1fr)}
-  .hero-datos div{padding:14px 18px}
-  .hero-datos div:nth-child(odd){border-left:none}
-  .hero-datos div:nth-child(n+3){border-top:1px solid rgba(255,255,255,.18)}
-  .caracteristicas{grid-template-columns:1fr;margin-top:48px}
-  .galeria-grilla{grid-template-columns:1fr}
-  .foto img{height:280px}
-  .tarjeta-imagen img{height:320px}
-  .mapa-tarjeta{min-height:360px}
-  .cta-tarjeta{padding:52px 7%}
-  .pie-arriba{flex-direction:column}
-  .pie-contacto{width:100%;min-width:0}
-}
-
-/* Móvil muy pequeño */
-@media (max-width:400px){
-  .marca-texto{font-size:1.1rem}
-  .marca-icono{width:40px;height:40px}
-  .boton{padding:13px 22px;font-size:.9rem}
-  .hero-datos div{padding:12px 14px}
-  .hero-datos strong{font-size:1.15rem}
-}
-
-/* Accesibilidad: respetar reducción de movimiento */
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{transition:none !important}
-}
-
-
-              </style>
                         </head>
                         <body>
                             <!-- index.html — Mérida Campestre -->
@@ -403,7 +21,7 @@ section{padding:96px 0}
 <link rel="preconnect" href="https://image.qwenlm.ai" crossorigin>
 
 <!-- Precarga de la imagen principal (LCP) -->
-<link rel="preload" as="image" href="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png">
+<link rel="preload" as="image" href="assets/img/fachada/f2.jpeg">
 
 <!-- Solo dos tipografías: Cormorant Garamond (títulos, formal y delgada) + Libre Franklin (texto) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond/300.css">
@@ -416,7 +34,7 @@ section{padding:96px 0}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/libre-franklin/700.css">
 
 <!-- Hoja de estilos separada -->
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 
 <!-- Script al final con defer para no bloquear el render -->
 <script src="script.js" defer></script>
@@ -428,7 +46,7 @@ section{padding:96px 0}
   <div class="wrap nav">
     <a class="marca" href="#inicio">
       <span class="marca-icono" aria-hidden="true">M</span>
-      <span class="marca-texto">méridacampestre<small>terreno · avenida · historia</small></span>
+      <span class="marca-texto">méridacampestre<small>· avenida · historia</small></span>
     </a>
     <nav class="nav-enlaces" id="navEnlaces" aria-label="Navegación principal">
       <a href="#propiedad">Propiedad</a>
@@ -444,16 +62,16 @@ section{padding:96px 0}
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio">
   <div class="hero-fondo">
-    <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png"
+    <img src="assets/img/fachada/f2.jpeg"
          alt="Casa colonial sobre avenida en Mérida, Yucatán"
          width="1600" height="1000" fetchpriority="high" decoding="async">
   </div>
   <div class="hero-contenido">
     <div class="wrap">
       <div class="hero-etiqueta"><span class="punto" aria-hidden="true"></span> En venta · Disponible</div>
-      <h1>Terreno con casa sobre <em>Avenida</em> en el corazón de Mérida</h1>
+      <h1>Casa para proyecto <em>Sobre avenida</em> en Mérida</h1>
       <p class="hero-sub">
-        Propiedad única en una de las colonias más antiguas y bonitas de la ciudad.
+        Propiedad única en colonia Campestre, una de las  más antiguas y bonitas de la ciudad.
         Superficie estratégica con uso de suelo ideal para <strong>comercio, edificio o locales comerciales</strong>.
       </p>
       <div class="hero-datos">
@@ -491,7 +109,7 @@ section{padding:96px 0}
       </div>
       <div class="col-imagen tarjeta-imagen">
         <span class="sello">Sobre Avenida</span>
-        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png"
+        <img src="assets/img/fachada/f3.jpeg"
              alt="Vista de la propiedad con jardín hacia la avenida"
              width="1200" height="900" loading="lazy" decoding="async">
       </div>
@@ -533,19 +151,21 @@ section{padding:96px 0}
       <p class="sec-nota">Haz clic en cualquier fotografía para ampliarla y apreciar el carácter colonial de la propiedad.</p>
     </div>
     <div class="galeria-grilla">
-      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png" data-cap="Fachada principal sobre avenida — arquitectura colonial">
+      <figure class="foto" data-full="assets/img/garage/1g.jpeg" data-cap="Fachada principal sobre avenida — arquitectura colonial">
         <span class="foto-num">01</span>
-        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1acff1983-3586-490d-981d-6379b77ef7dd.png" alt="Fachada colonial principal sobre avenida" width="1200" height="900" loading="lazy" decoding="async">
+        <img src="assets/img/garage/1g.jpeg" alt="Fachada colonial principal sobre avenida" width="1200" height="900" loading="lazy" decoding="async">
         <figcaption>Fachada principal sobre avenida</figcaption>
       </figure>
-      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c459e0b3-4fef-48b0-9c5b-7f25b9788176.png" data-cap="Detalle de muros originales y ventanales de época">
+
+      <figure class="foto" data-full="assets/img/fachada/f3-hero.webp" data-cap="Detalle de muros originales y ventanales de época">
         <span class="foto-num">02</span>
-        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c459e0b3-4fef-48b0-9c5b-7f25b9788176.png" alt="Detalle de fachada con bugambilias" width="1200" height="900" loading="lazy" decoding="async">
+        <img src="assets/img/fachada/f3-hero.webp" alt="Detalle de fachada con bugambilias" width="1200" height="900" loading="lazy" decoding="async">
         <figcaption>Muros y ventanales de época</figcaption>
       </figure>
-      <figure class="foto" data-full="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png" data-cap="Jardín frontal y palmeras hacia la avenida">
+
+      <figure class="foto" data-full="assets/img/garage/2g.jpeg" data-cap="Jardín frontal y palmeras hacia la avenida">
         <span class="foto-num">03</span>
-        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/1c5b2846c-dd63-4ea1-abec-faf8e956bc9e.png" alt="Jardín frontal de la propiedad" width="1200" height="900" loading="lazy" decoding="async">
+        <img src="assets/img/garage/2g.jpeg" alt="Jardín frontal de la propiedad" width="1200" height="900" loading="lazy" decoding="async">
         <figcaption>Jardín frontal hacia la avenida</figcaption>
       </figure>
     </div>
@@ -576,7 +196,7 @@ section{padding:96px 0}
         <span class="esquina tr" aria-hidden="true"></span>
         <span class="esquina bl" aria-hidden="true"></span>
         <span class="esquina br" aria-hidden="true"></span>
-        <img src="https://image.qwenlm.ai/public_source/e4fcee55-08ac-42ba-a378-fd84009455f4/103539130-c8f0-4dc4-8480-cf32ae47e252.png"
+        <img src="assets/img/fachada/plano.jpg"
              alt="Plano del terreno: frente 15 m, fondo 42 m, casa, patio, banqueta y avenida"
              width="1200" height="900" loading="lazy" decoding="async">
       </div>
@@ -624,12 +244,7 @@ section{padding:96px 0}
         </ul>
       </div>
       <div class="mapa-tarjeta">
-        <iframe
-          src="https://www.google.com/maps?q=Centro%20Hist%C3%B3rico%2C%20M%C3%A9rida%2C%20Yucat%C3%A1n%2C%20M%C3%A9xico&z=14&output=embed"
-          title="Mapa de ubicación del terreno en Mérida, Yucatán"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1128.0144066718037!2d-89.61905282608213!3d21.008445925341352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDAwJzMwLjYiTiA4OcKwMzcnMDYuNyJX!5e0!3m2!1ses!2smx!4v1786989818469!5m2!1ses!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </div>
@@ -642,11 +257,11 @@ section{padding:96px 0}
       <h2>¿Listo para desarrollar tu próximo proyecto en Mérida?</h2>
       <p>Agenda una visita al terreno o solicita información de precios, medidas y uso de suelo. Respondemos el mismo día.</p>
       <div class="cta-botones">
-        <a class="boton boton-whats" href="https://wa.me/529991234567?text=Hola%2C%20me%20interesa%20el%20terreno%20en%20venta%20sobre%20avenida%20en%20M%C3%A9rida" target="_blank" rel="noopener">
+        <a class="boton boton-whats" href="https://wa.me/52999 901 1577?text=Hola%2C%20me%20interesa%20el%20terreno%20en%20venta%20sobre%20avenida%20en%20M%C3%A9rida" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7 0-1.3.7-1.9.9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.3-.3.5l-.5.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.3.1 1.6.8 1.9.9.3.2.5.2.5.4.1.1.1.6-.1 1.1Z"/></svg>
           Escribir por WhatsApp
         </a>
-        <a class="boton boton-blanco" href="tel:+529991234567">
+        <a class="boton boton-blanco" href="tel:+52999 901 1577">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></svg>
           Llamar ahora
         </a>
@@ -669,7 +284,7 @@ section{padding:96px 0}
       <div class="pie-contacto">
         <span class="pie-etiqueta">Contacto</span>
         <p class="pie-datos">
-          <a href="tel:+529991234567">+52 999 123 4567</a>
+          <a href="tel:+529991234567">+52999 901 1577</a>
           <a href="mailto:ventas@meridacampestre.mx">ventas@meridacampestre.mx</a>
         </p>
       </div>
